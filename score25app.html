@@ -34,6 +34,7 @@
             border-bottom: 1px solid #ddd;
             color: white;
             font-weight: bold;
+            z-index: 1000; /* لضمان أن يكون الزر دائمًا فوق المحتوى */
         }
         button {
             padding: 10px 20px;
@@ -54,10 +55,16 @@
     <div id="control-panel">
         *** كتاب مسابقة المراحل لعام 2024_2025 ***
         <br>
+        
+        <!-- إضافة زر التنقل في أعلى الصفحة -->
+        <button onclick="navigateToPage()">انتقل إلى عرض المسابقات</button>
+        
+        <br>
         <label for="pageNumber">أدخل رقم الصفحة:</label>
         <input type="number" id="pageNumber" min="1" value="1">
         <button onclick="generateLinks()">عرض الصفحة</button>
     </div>
+    
     <div class="image-container">
         <img src="https://github.com/mosabka25/mosabaka25/blob/f0f10b13c020667ec90cca46af06363fd461274b/%D8%A7%D9%84%D9%81%D9%87%D8%B1%D8%B3-%D8%B5%D9%88%D8%B1-0-%D9%85%D8%AF%D9%85%D8%AC-%D8%B5%D9%88%D8%B1-0.jpg?raw=true" alt="صفحة الفهرس">
         <img src="https://github.com/mosabka25/mosabaka25/blob/f0f10b13c020667ec90cca46af06363fd461274b/%D8%A7%D9%84%D9%81%D9%87%D8%B1%D8%B3-%D8%B5%D9%88%D8%B1-0-%D9%85%D8%AF%D9%85%D8%AC-%D8%B5%D9%88%D8%B1-1.jpg?raw=true" alt="صفحة الفهرس 1">
@@ -72,6 +79,11 @@
         const pageNumber = document.getElementById("pageNumber").value;
         const previewLink = `${pdfUrl}#page=${pageNumber}`;
         window.open(previewLink, '_blank');
+    }
+
+    function navigateToPage() {
+        const url = "https://mosabka25.github.io/mosabaka25/index.html";
+        window.location.href = url;
     }
     </script>
 </body>
