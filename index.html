@@ -3,74 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المسابقات المدرسية لعام 2024/2025</title>
+    <title>مسابقات الجمهورية للمراحل لعام 2024/2025</title>
     <style>
+        /* CSS عام */
         body {
-            font-family: 'Cairo', sans-serif; /* استخدام خط كايرو للأناقة */
-            background-color: #FDF7E3; /* لون خلفية هادئ يناسب البيئة التعليمية */
+            font-family: 'Cairo', sans-serif;
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/0ce7380c621cd29c720e317a311004f9bb6cbf0d/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A9_1.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            background-size: 50% auto; /* تصغير الصورة بنسبة 50% */
+            background-color: #FDF7E3;
             color: #333;
             margin: 0;
             padding: 0;
             text-align: center;
         }
 
-        header {
+        /* CSS للشاشات الكبيرة */
+        @media (min-width: 768px) {
+            .control-panel h1 {
+                font-size: 2em;
+            }
+
+            section h2 {
+                font-size: 2em;
+            }
+
+            button {
+                font-size: 1.2em;
+                padding: 15px 30px;
+            }
+        }
+
+        /* CSS للشاشات الصغيرة */
+        @media (max-width: 767px) {
+            .control-panel h1 {
+                font-size: 1.6em;
+            }
+
+            section h2 {
+                font-size: 1.6em;
+            }
+
+            button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+
+            footer {
+                padding: 10px;
+            }
+        }
+
+        /* CSS مشترك */
+        .control-panel {
             background-color: #4CAF50;
             color: white;
             padding: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            position: relative;
-        }
-
-        header h1 {
-            font-size: 2.8em;
-            margin: 0;
-            font-weight: bold;
-        }
-
-        h1.main-title {
-            font-size: 4em;
-            font-weight: bold;
-            color: #FF6F61; /* لون مناسب للإعلان */
-            margin: 50px 0; /* مسافة لتوسيط العنوان */
-        }
-
-        nav#control-panel {
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: #4CAF50;
-            padding: 15px;
-            color: white;
             z-index: 1000;
             text-align: center;
         }
 
-        section {
-            padding: 50px 20px;
-            background-color: #fff;
+        .control-panel h1 {
+            margin: 0;
+            font-weight: bold;
         }
 
-        section h2 {
-            font-size: 2em;
-            color: #333;
-            margin-bottom: 30px;
+        section {
+            padding: 60px 10px 1px; /* زيادة المسافة للأعلى */
+            background-color: rgba(255, 255, 255, 0.8); /* إضافة خلفية شفافة للقسم */
         }
 
         button {
             background-color: #FFD700;
             color: #333;
-            padding: 15px 30px;
             border: none;
-            font-size: 1.2em;
             cursor: pointer;
-            border-radius: 10px; /* زوايا مستديرة أكثر */
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* ظل لطيف */
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease;
+            margin: 0 10px; /* إضافة مسافة بين الأزرار */
         }
 
         button:hover {
-            background-color: #FF6F61; /* لون hover أكثر نعومة */
+            background-color: #FF6F61;
         }
 
         footer {
@@ -80,71 +101,31 @@
             position: fixed;
             width: 100%;
             bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
         }
 
         footer p {
             margin: 0;
         }
-
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2, h3 {
-            text-align: center;
-        }
-
-        label, select, input {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 10px;
-            font-size: 16px;
-        }
-
-        .video-player {
-            width: 100%;
-            height: 0;
-            overflow: hidden;
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            margin-top: 20px;
-            display: none;
-        }
-
-        .video-player iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
     </style>
 </head>
 <body>
 
-<header>
+<div class="control-panel">
     <h1>مسابقة الجمهورية للمراحل لعام 2024/2025</h1>
-    <nav id="control-panel">
-        <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/vedio.html';">فيديوهات المسابقة</button>
-        <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/score25app.html';">نوت المسابقة</button>
-    </nav>
-</header>
-
-<!-- العنوان الإعلاني الكبير في منتصف الصفحة -->
-<h1 class="main-title">مسابقة الجمهورية للمراحل لعام 2024/2025</h1>
+</div>
 
 <section>
     <h2>اكتشف المزيد حول مسابقات هذا العام!</h2>
 </section>
 
 <footer>
-    <p>&copy; 2024-2025 - مسابقات الجمهورية للمراحل</p>
+    <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/vedio.html';">فيديوهات المسابقة</button>
+    <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/score25app.html';">نوت المسابقة</button>
+    
 </footer>
 
 </body>
