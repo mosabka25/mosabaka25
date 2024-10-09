@@ -13,6 +13,7 @@
             text-align: center;
             background-color: #FDF7E3;
             color: #333;
+            opacity: 0.8; /* تقليل مستوى العتمة قليلاً */
         }
 
         /* صورة الخلفية المتكيفة */
@@ -28,7 +29,6 @@
             background-position: center;
             background-size: contain; /* تكييف الصورة مع جميع أحجام الشاشات */
             z-index: -1;
-            opacity: 0.5; /* تعديل الشفافية إذا كنت بحاجة إلى ذلك */
         }
 
         /* CSS للشاشات الكبيرة */
@@ -69,7 +69,7 @@
 
         /* CSS مشترك */
         .control-panel {
-            background-color: #4CAF50;
+            background-color: #E41C23;
             color: white;
             padding: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -86,8 +86,12 @@
         }
 
         section {
-            padding: 90px 20px 10px; /* زيادة المسافة للأعلى */
+            padding: 80px 20px 10px; /* زيادة المسافة للأعلى */
             background-color: rgba(255, 255, 255, 0.8); /* إضافة خلفية شفافة للقسم */
+        }
+
+        section h2 {
+            font-size: calc(100% - 10%); /* تقليل حجم الخط بنسبة 20% */
         }
 
         button {
