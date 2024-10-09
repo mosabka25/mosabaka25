@@ -6,17 +6,28 @@
     <title>المسابقات المدرسية لعام 2024/2025</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #FDF7E3;
-            color: #333;
+            font-family: 'Cairo', sans-serif;
             margin: 0;
             padding: 0;
             text-align: center;
+            background-color: #FDF7E3;
+            color: #333;
+            opacity: 0.8;
         }
-        
-        header h1 {
-            font-size: 2.5em;
-            margin: 0;
+
+        /* صورة الخلفية المتكيفة */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/0ce7380c621cd29c720e317a311004f9bb6cbf0d/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A9_1.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            z-index: -1;
         }
 
         nav#control-panel {
@@ -24,12 +35,12 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #4CAF50;
-            padding: 15px;
+            background-color: #E41C23;
+            padding: 20px;
             color: white;
             z-index: 1000;
             text-align: center;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         nav#control-panel button {
@@ -50,8 +61,8 @@
         }
 
         section {
-            padding: 50px 20px;
-            background-color: #fff;
+            padding: 80px 20px 10px;
+            background-color: rgba(255, 255, 255, 0.8);
         }
 
         section h2 {
@@ -82,6 +93,10 @@
             position: fixed;
             width: 100%;
             bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
         }
 
         footer p {
@@ -126,6 +141,26 @@
             height: 100%;
             border: 0;
         }
+
+        /* CSS للشاشات الكبيرة */
+        @media (min-width: 768px) {
+            nav#control-panel button {
+                font-size: 1.2em;
+                padding: 15px 30px;
+            }
+        }
+
+        /* CSS للشاشات الصغيرة */
+        @media (max-width: 767px) {
+            nav#control-panel button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+
+            footer {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -165,7 +200,8 @@
 </div>
 
 <footer>
-    <p>&copy; 2024-2025 - مسابقات الجمهورية للمراحل</p>
+    <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/vedio.html';">شاهد فيديوهات المسابقة</button>
+    <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/score25app.html';">شاهد نوت المسابقة</button>
 </footer>
 
 <script>
@@ -201,10 +237,6 @@
             url: "https://www.youtube.com/embed/TYheDn0i3F8"
         },
 
-
-
-
-
         "رياض الأطفال طبق السلاطة_نشيد": {
             stage: "رياض الأطفال طبق السلاطة",
             title: "نشيد",
@@ -214,152 +246,8 @@
             stage: "رياض الأطفال الصدق و الأمانة",
             title: "نشيد",
             url: "https://www.youtube.com/embed/AlEsI0mMNA0"
-        },
-        "ثانوي_مستوى رفيع": {
-            stage: "ثانوي",
-            title: "مستوى رفيع",
-            url:  "https://www.youtube.com/embed/CpQkbqagsTs"
-        },
-        "ثانوي_ريكورد": {
-            stage: "ثانوي",
-            title: "ريكورد",
-            url: "https://www.youtube.com/embed/m7kO8nnvxBM"
-        },
-        "ثانوي_كمان": {
-            stage: "ثانوي",
-            title: "كمان",
-            url: "https://www.youtube.com/embed/fuMwWOmFWPY"
-        },
-        "ثانوي_مندولين": {
-            stage: "ثانوي",
-            title: "مندولين",
-            url: "https://www.youtube.com/embed/enJhCIvC69o"
-        },
-        "ثانوي_نشيد": {
-            stage: "ثانوي",
-            title: "نشيد",
-            url: "https://www.youtube.com/embed/gWYha2I0ScQ"
-        },
-        "ثانوي_اكسيلفون": {
-            stage: "ثانوي",
-            title: "اكسيلفون",
-            url: "https://www.youtube.com/embed/tgPLY_EoeJ4"
-        },
-        "ثانوي_اكسيلفون الصوت الأول": {
-            stage: "ثانوي",
-            title: "اكسيلفون الصوت الأول",
-            url: "https://www.youtube.com/embed/buX4F_HgOGQ"
-        },
-        "ثانوي_اكسيلفون الصوت الثاني": {
-            stage: "ثانوي",
-            title: "اكسيلفون الصوت الثاني",
-            url: "https://www.youtube.com/embed/DCZowT1QaKE"
-        },
-        "ثانوي_اكورديون": {
-            stage: "ثانوي",
-            title: "اكورديون",
-            url: "https://www.youtube.com/embed/aeSulZejzLw"
-        },
-        "ثانوي_بيانو": {
-            stage: "ثانوي",
-            title: "بيانو",
-            url: "https://www.youtube.com/embed/Nwx0EzF1ijU"
-        },
-        "ثانوي_جيتار": {
-            stage: "ثانوي",
-            title: "جيتار",
-            url: "https://www.youtube.com/embed/QLFnpVeu280"
-        },
-        "إعدادى_مستوى رفيع": {
-            stage: "إعدادى",
-            title: "مستوى رفيع",
-            url: "https://www.youtube.com/embed/opBoRv-5q6Q"
-        },
-        "إعدادى_ريكورد": {
-            stage: "إعدادى",
-            title: "ريكورد",
-            url: "https://www.youtube.com/embed/h15d1c3rRoU"
-        },
-        "إعدادى_كمان": {
-            stage: "إعدادى",
-            title: "كمان",
-            url: "https://www.youtube.com/embed/P9ZCVkxE5Sg"
-        },
-        "إعدادى_مندولين": {
-            stage: "إعدادى",
-            title: "مندولين",
-            url: "https://www.youtube.com/embed/3Cbo-kYNUJA"
-        },
-        "إعدادى_نشيد": {
-            stage: "إعدادى",
-            title: "نشيد",
-            url: "https://www.youtube.com/embed/5G9v_BMJuzg"
-        },
-        "إعدادى_اكسيلفون": {
-            stage: "إعدادى",
-            title: "اكسيلفون",
-            url: "https://www.youtube.com/embed/9jgxgbOA5Nw"
-        },
-        "إعدادى_اكورديون": {
-            stage: "إعدادى",
-            title: "اكورديون",
-            url: "https://www.youtube.com/embed/pSIlpGE5IG8"
-        },
-        "إعدادى_بيانو": {
-            stage: "إعدادى",
-            title: "بيانو",
-            url: "https://www.youtube.com/embed/m_rggvcHqoQ"
-        },
-        "إعدادى_جيتار": {
-            stage: "إعدادى",
-            title: "جيتار",
-            url: "https://www.youtube.com/embed/lEkcfppzYMk"
-        },
-        "ابتدائى_مستوى رفيع": {
-            stage: "ابتدائى",
-            title: "مستوى رفيع",
-            url: "https://www.youtube.com/embed/pPMEgeGZ_YQ"
-        },
-        "ابتدائى_ريكورد": {
-            stage: "ابتدائى",
-            title: "ريكورد",
-            url: "https://www.youtube.com/embed/929F8jXyuls"
-        },
-        "ابتدائى_كمان": {
-            stage: "ابتدائى",
-            title: "كمان",
-            url: "https://www.youtube.com/embed/twajs7zKZTs"
-        },
-        "ابتدائى_مندولين": {
-            stage: "ابتدائى",
-            title: "مندولين",
-            url: "https://www.youtube.com/embed/77fds3MciLI"
-        },
-        "ابتدائى_نشيد": {
-            stage: "ابتدائى",
-            title: "نشيد",
-            url: "https://www.youtube.com/embed/GimGTEJOMG0"
-        },
-        "ابتدائى_اكسيلفون": {
-            stage: "ابتدائى",
-            title: "اكسيلفون",
-            url: "https://www.youtube.com/embed/hjXTL7__F5g"
-        },
-        "ابتدائى_اكورديون": {
-            stage: "ابتدائى",
-            title: "اكورديون",
-            url: "https://www.youtube.com/embed/J9LZLarTrZo"
-        },
-        "ابتدائى_بيانو": {
-            stage: "ابتدائى",
-            title: "بيانو",
-            url: "https://www.youtube.com/embed/JefuFYXFK8Q"
-        },
-        "ابتدائى_جيتار": {
-            stage: "ابتدائى",
-            title: "جيتار",
-            url: "https://www.youtube.com/embed/NSm5m6q9LHg"
         }
+        // إضافة المزيد من الفيديوهات هنا...
     };
 
     let videos = { ...defaultVideos };
