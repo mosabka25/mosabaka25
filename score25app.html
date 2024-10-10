@@ -1,90 +1,238 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar">
 <head>
-    <title>كتاب مسابقة المراحل لعام 2024_2025</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كتاب مسابقة المراحل لعام 2024/2025</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Cairo', sans-serif;
             margin: 0;
             padding: 20px;
             text-align: center;
-            background-color: #E6F3FF; /* لون خلفية فاتح ومريح للعين */
+            background-color: #FDF7E3;
+            color: #333;
+            opacity: 0.8;
         }
-        .image-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
+
+        /* صورة الخلفية المتكيفة */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/0ce7380c621cd29c720e317a311004f9bb6cbf0d/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A9_1.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+            opacity: 0.2;
         }
-        .image-container img {
-            max-width: 80%;
-            height: auto;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
+
         #control-panel {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #4CAF50;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
+            background-color: #E41C23;
+            padding: 20px;
             color: white;
-            font-weight: bold;
-            z-index: 1000; /* لضمان أن يكون الزر دائمًا فوق المحتوى */
+            z-index: 1000;
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+
+        #control-panel button {
             background-color: #FFD700;
             color: #333;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: bold;
+            font-size: 1.1em;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        #control-panel button:hover {
+            background-color: #FF6F61;
+            color: white;
+        }
+
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 120px; /* لضمان عدم التداخل مع لوحة التحكم */
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        footer button {
+            background-color: #FFD700;
+            color: #333;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+
+        footer button:hover {
+            background-color: #FF6F61;
+            color: white;
+        }
+
+        /* PDF Viewer Styles */
+        #pdf-viewer {
+            width: 100%;
+            height: 800px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+
+        .pdf-controls {
             margin-top: 10px;
         }
-        button:hover {
-            background-color: #FFC107;
+
+        .pdf-controls input {
+            width: 50px;
         }
     </style>
 </head>
 <body>
-    <div id="control-panel">
-        *** كتاب مسابقة المراحل لعام 2024_2025 ***
-        <br>
-        
-        <!-- إضافة زر التنقل في أعلى الصفحة -->
-        <button onclick="navigateToPage()">انتقل إلى عرض المسابقات</button>
-        
-        <br>
-        <label for="pageNumber">أدخل رقم الصفحة:</label>
-        <input type="number" id="pageNumber" min="1" value="1">
-        <button onclick="generateLinks()">عرض الصفحة</button>
+
+<div id="control-panel">
+    *** كتاب مسابقة المراحل لعام 2024_2025 ***
+    <br>
+    <div class="controls">
+
     </div>
-    
-    <div class="image-container">
-        <img src="https://github.com/mosabka25/mosabaka25/blob/f0f10b13c020667ec90cca46af06363fd461274b/%D8%A7%D9%84%D9%81%D9%87%D8%B1%D8%B3-%D8%B5%D9%88%D8%B1-0-%D9%85%D8%AF%D9%85%D8%AC-%D8%B5%D9%88%D8%B1-0.jpg?raw=true" alt="صفحة الفهرس">
-        <img src="https://github.com/mosabka25/mosabaka25/blob/f0f10b13c020667ec90cca46af06363fd461274b/%D8%A7%D9%84%D9%81%D9%87%D8%B1%D8%B3-%D8%B5%D9%88%D8%B1-0-%D9%85%D8%AF%D9%85%D8%AC-%D8%B5%D9%88%D8%B1-1.jpg?raw=true" alt="صفحة الفهرس 1">
+    <div class="pdf-controls">
+        <button id="prev-page">الصفحة السابقة</button>
+        <input type="number" id="page-num" value="1" min="1">
+        <button id="next-page">الصفحة التالية</button>
+        <button id="download-page">تحميل الصفحة</button>
+        <span id="page-count"></span>
     </div>
+</div>
 
-    <iframe id="pdf-viewer" style="display:none;"></iframe>
+<div class="image-container">
+    <img id="image-display" src="https://raw.githubusercontent.com/mosabka25/mosabaka25/6e97e68188be0e7b3cebfe957b16ab725344a5e8/%D8%A7%D9%84%D9%81%D9%87%D8%B1%D8%B3%20%D9%85%D8%B9%D8%AF%D9%84%202.jpg" alt="صورة 1">
+    <img id="image-display" src="https://github.com/mosabka25/mosabaka25/blob/5dc8c0e7326d020abf14cb2135ec8c5d160ad98a/fhres1.png?raw=true" alt="صورة 2">
+</div>
 
-    <script>
-    const pdfUrl = "https://raw.githubusercontent.com/mosabka25/mosabaka25/60ead4c19f20bf5d640ead506b0f830ff993ce72/%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A9%20%D9%83%D8%A7%D9%85%D9%84%D8%A9.pdf";
+<canvas id="pdf-viewer"></canvas>
 
-    function generateLinks() {
-        const pageNumber = document.getElementById("pageNumber").value;
-        const previewLink = `${pdfUrl}#page=${pageNumber}`;
-        window.open(previewLink, '_blank');
+<footer>
+    <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/index.html';">الصفحة الرئيسية</button>
+</footer>
+
+<script>
+    // PDF Viewer
+    const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/6e97e68188be0e7b3cebfe957b16ab725344a5e8/%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A9%20%D9%83%D8%A7%D9%85%D9%84%D8%A9.pdf';
+    let pdfDoc = null,
+        pageNum = 1,
+        pageRendering = false,
+        pageNumPending = null,
+        scale = 1.5,
+        canvas = document.getElementById('pdf-viewer'),
+        ctx = canvas.getContext('2d');
+
+    function renderPage(num) {
+        pageRendering = true;
+        pdfDoc.getPage(num).then(function(page) {
+            var viewport = page.getViewport({scale: scale});
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            var renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            var renderTask = page.render(renderContext);
+
+            renderTask.promise.then(function() {
+                pageRendering = false;
+                if (pageNumPending !== null) {
+                    renderPage(pageNumPending);
+                    pageNumPending = null;
+                }
+            });
+        });
+
+        document.getElementById('page-num').value = num;
     }
 
-    function navigateToPage() {
-        const url = "https://mosabka25.github.io/mosabaka25/index.html";
-        window.location.href = url;
+    function queueRenderPage(num) {
+        if (pageRendering) {
+            pageNumPending = num;
+        } else {
+            renderPage(num);
+        }
     }
-    </script>
+
+    function onPrevPage() {
+        if (pageNum <= 1) {
+            return;
+        }
+        pageNum--;
+        queueRenderPage(pageNum);
+    }
+
+    function onNextPage() {
+        if (pageNum >= pdfDoc.numPages) {
+            return;
+        }
+        pageNum++;
+        queueRenderPage(pageNum);
+    }
+
+    function downloadPage() {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL();
+        link.download = `page_${pageNum}.png`;
+        link.click();
+    }
+
+    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
+        pdfDoc = pdfDoc_;
+        document.getElementById('page-count').textContent = pdfDoc.numPages;
+        renderPage(pageNum);
+    });
+
+    document.getElementById('prev-page').addEventListener('click', onPrevPage);
+    document.getElementById('next-page').addEventListener('click', onNextPage);
+    document.getElementById('page-num').addEventListener('change', function() {
+        pageNum = parseInt(this.value);
+        queueRenderPage(pageNum);
+    });
+    document.getElementById('download-page').addEventListener('click', downloadPage);
+</script>
+
 </body>
 </html>
