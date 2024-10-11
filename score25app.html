@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كتاب مسابقة التربية الموسيقية لعام 2024/2025</title>
+    <title>كتاب مسابقة المراحل لعام 2024/2025</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
     <style>
         body {
@@ -38,7 +38,7 @@
             left: 0;
             width: 100%;
             background-color: #E41C23;
-            padding: 20px;
+            padding: 1em;
             color: white;
             z-index: 1000;
             text-align: center;
@@ -48,12 +48,12 @@
         #control-panel button {
             background-color: #FFD700;
             color: #333;
-            padding: 12px 24px;
+            padding: 0.8em 1.5em;
             border: none;
-            border-radius: 10px;
+            border-radius: 0.625em;
             cursor: pointer;
-            font-size: 1.1em;
-            margin: 0 10px;
+            font-size: 1em;
+            margin: 0 0.5em;
             transition: background-color 0.3s ease;
         }
 
@@ -66,39 +66,39 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 120px; /* لضمان عدم التداخل مع لوحة التحكم */
-            margin-bottom: 20px;
+            margin-top: 6.25em; /* لضمان عدم التداخل مع لوحة التحكم */
+            margin-bottom: 1.25em;
         }
 
         .image-container img {
             max-width: 100%;
             height: auto;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.25em;
+            border-radius: 0.625em;
+            box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
         }
 
         footer {
             background-color: #333;
             color: white;
-            padding: 20px;
+            padding: 1.25em;
             position: fixed;
             width: 100%;
             bottom: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 1.25em;
         }
 
         footer button {
             background-color: #FFD700;
             color: #333;
-            padding: 12px 24px;
+            padding: 0.8em 1.5em;
             border: none;
-            border-radius: 10px;
+            border-radius: 0.625em;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1em;
             transition: background-color 0.3s ease;
         }
 
@@ -107,46 +107,54 @@
             color: white;
         }
 
-        /* PDF Viewer Styles */
+        /* أنماط عارض PDF */
         #pdf-viewer {
             width: 100%;
-            height: 800px;
+            height: 50em;
             border: 1px solid #ccc;
-            margin-top: 20px;
+            margin-top: 1.25em;
         }
 
         .pdf-controls {
-            margin-top: 10px;
+            margin-top: 0.625em;
         }
 
         .pdf-controls input {
-            width: 50px;
+            width: 3.125em;
         }
 
-        /* Media Queries */
-        @media only screen and (max-width: 768px) {
+        /* استعلامات الوسائط */
+        @media only screen and (max-width: 48em) {
             .image-container {
-                margin-top: 80px;
+                margin-top: 5em;
             }
             #control-panel {
-                padding: 10px;
+                padding: 0.625em;
             }
             #control-panel button {
-                padding: 8px 16px;
-                font-size: 1em;
-            }
-        }
-
-        @media only screen and (max-width: 480px) {
-            .image-container {
-                margin-top: 60px;
-            }
-            #control-panel {
-                padding: 5px;
-            }
-            #control-panel button {
-                padding: 6px 12px;
+                padding: 0.5em 1em;
                 font-size: 0.9em;
+            }
+            footer button {
+                padding: 0.5em 1em;
+                font-size: 0.9em;
+            }
+        }
+
+        @media only screen and (max-width: 30em) {
+            .image-container {
+                margin-top: 3.75em;
+            }
+            #control-panel {
+                padding: 0.3125em;
+            }
+            #control-panel button {
+                padding: 0.375em 0.75em;
+                font-size: 0.8em;
+            }
+            footer button {
+                padding: 0.375em 0.75em;
+                font-size: 0.8em;
             }
         }
     </style>
@@ -160,23 +168,23 @@
 
     </div>
     <div class="pdf-controls">
-        <button id="prev-page">الصفحة السابقة</button>
+        <button id="prev-page">السابق</button>
         <input type="number" id="page-num" value="1" min="1">
-        <button id="next-page">الصفحة التالية</button>
-        <button id="download-page">تحميل الصفحة</button>
+        <button id="next-page">التالي</button>
+        <button id="download-page">تحميل</button>
         <span id="page-count"></span>
     </div>
 </div>
 
 <div class="image-container">
-<img id="image-display" src="https://raw.githubusercontent.com/mosabka25/mosabaka25/6e97e68188be0e7b3cebfe957b16ab725344a5e8/%D8%A7%D9%84%D9%81%D9%87%D8%B1%D8%B3%20%D9%85%D8%B9%D8%AF%D9%84%202.jpg" alt="صورة 2">
     <img id="image-display" src="https://raw.githubusercontent.com/mosabka25/mosabaka25/38a4e377d0ba7692da7f5c9b5e5d5767eea600d4/%D8%A7%D9%84%D9%81%D9%87%D8%B1%D8%B3%20%D9%85%D8%B9%D8%AF%D9%84%201.jpg" alt="صورة 1">
-    </div>
+    <img id="image-display" src="https://raw.githubusercontent.com/mosabka25/mosabaka25/6e97e68188be0e7b3cebfe957b16ab725344a5e8/%D8%A7%D9%84%D9%81%D9%87%D8%B1%D8%B3%20%D9%85%D8%B9%D8%AF%D9%84%202.jpg" alt="صورة 2">
+</div>
 
 <canvas id="pdf-viewer"></canvas>
 
 <footer>
-    <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/index.html';">الصفحة الرئيسية</button>
+    <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/index.html';">الرئيسية</button>
 </footer>
 
 <script>
