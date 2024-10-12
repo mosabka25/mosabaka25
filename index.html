@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مسابقات الجمهورية للمراحل لعام 2024/2025</title>
+    <title>دليلي ميوزيك*DALELY MUSIC</title>
     <style>
         /* CSS عام */
         body {
@@ -11,23 +11,36 @@
             margin: 0;
             padding: 0;
             text-align: center;
-            background-color: #FDF7E3;
             color: #333;
-            opacity: 0.8; /* تقليل مستوى العتمة قليلاً */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f9f9f9;
         }
 
-        /* صورة الخلفية المتكيفة */
-        body::before {
-            content: "";
+        /* خلفية الصورة */
+        .background-image {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/0ce7380c621cd29c720e317a311004f9bb6cbf0d/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A9_1.jpg');
+            right: 0;
+            bottom: 0;
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/327c4aad7019463731697b529095eebf103b8842/dalelycover.png');
             background-repeat: no-repeat;
             background-position: center;
-            background-size: contain; /* تكييف الصورة مع جميع أحجام الشاشات */
+            background-size: cover;
+            opacity: 0.8;
+            z-index: -2;
+        }
+
+        /* طبقة شبه شفافة للخلفية */
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
             z-index: -1;
         }
 
@@ -37,13 +50,8 @@
                 font-size: 2em;
             }
 
-            section h2 {
-                font-size: 2em;
-            }
-
-            button {
+            .buttons-container {
                 font-size: 1.2em;
-                padding: 15px 30px;
             }
         }
 
@@ -53,17 +61,8 @@
                 font-size: 1.6em;
             }
 
-            section h2 {
-                font-size: 1.6em;
-            }
-
-            button {
+            .buttons-container {
                 font-size: 1em;
-                padding: 10px 20px;
-            }
-
-            footer {
-                padding: 10px;
             }
         }
 
@@ -73,7 +72,7 @@
             color: white;
             padding: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            position: fixed;
+            position: sticky;
             top: 0;
             width: 100%;
             z-index: 1000;
@@ -85,41 +84,66 @@
             font-weight: bold;
         }
 
-        section {
-            padding: 80px 20px 10px; /* زيادة المسافة للأعلى */
-            background-color: rgba(255, 255, 255, 0.8); /* إضافة خلفية شفافة للقسم */
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        section h2 {
-            font-size: calc(100% - 10%); /* تقليل حجم الخط بنسبة 20% */
+        /* ترتيب الأزرار بحيث يكون كل زر في سطر مستقل */
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px; /* تحديد الحد الأقصى لعرض الأزرار */
+            margin: 0 auto;
         }
 
-        button {
+        /* أزرار بيضاوية مع تأثيرات وتوحيد الحجم */
+        .buttons-container button {
             background-color: #FFD700;
             color: #333;
             border: none;
             cursor: pointer;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-            margin: 0 10px; /* إضافة مسافة بين الأزرار */
+            border-radius: 50px; /* لجعل الأزرار بيضاوية */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            width: 100%;
+            max-width: 500px; /* تحديد الحد الأقصى لعرض كل زر */
+            height: 60px; /* تحديد ارتفاع موحد لجميع الأزرار */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            white-space: normal; /* للسماح بتغليف النص */
+            word-wrap: break-word; /* تقسيم الكلمات الطويلة */
         }
 
-        button:hover {
+        /* تأثير عند التمرير فوق الزر */
+        .buttons-container button:hover {
             background-color: #FF6F61;
+        }
+
+        /* تأثير عند الضغط على الزر */
+        .buttons-container button:active {
+            transform: scale(0.95);
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         footer {
             background-color: #333;
             color: white;
             padding: 20px;
-            position: fixed;
             width: 100%;
-            bottom: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
+            text-align: center;
         }
 
         footer p {
@@ -128,20 +152,30 @@
     </style>
 </head>
 <body>
+    <div class="background-image"></div>
+    <div class="background-overlay"></div>
 
-<div class="control-panel">
-    <h1>مسابقة الجمهورية للمراحل لعام 2024/2025</h1>
-</div>
+    <div class="control-panel">
+        <h1>DALELY MUSIC * دليلي ميوزيك</h1>
+    </div>
 
-<section>
-    <h2>اكتشف المزيد حول مسابقات هذا العام!</h2>
-</section>
+    <div class="content">
+        <div class="buttons-container">
+            <!-- زر مسابقة التربية الموسيقية في صف مستقل في أعلى الصفحة -->
+            <button onclick="window.location.href='https://mosabka25.github.io/mosabka25/vedio.html';">
+                مسابقة التربية الموسيقية<br>2024-2025
+            </button>
 
-<footer>
-    <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/vedio.html';">شاهد فيديوهات المسابقة</button>
-    <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/score25app.html';">شاهد نوت المسابقة</button>
-    
-</footer>
+            <!-- الأزرار المتبقية مرتبة بحيث يكون كل مفتاح في صف مستقل -->
+            <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/score25app.html';">دليل معلم التربية الموسيقية</button>
+            <button>دفتر التحضير</button>
+            <button>أغانى تعليمية</button>
+            <button>تحت الإنشاء</button> <!-- يمكنك إضافة أزرار إضافية هنا -->
+        </div>
+    </div>
 
+    <footer>
+        <p>&copy; 2023 مسابقة الجمهورية للمراحل</p>
+    </footer>
 </body>
 </html>
