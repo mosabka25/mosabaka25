@@ -1,179 +1,279 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليلي ميوزيك*DALELY MUSIC</title>
+    <title>دليلي ميوزيك</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* CSS عام */
-        body {
-            font-family: 'Cairo', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            text-align: center;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: #f9f9f9;
+            box-sizing: border-box;
         }
 
-        /* خلفية الصورة */
-        .background-image {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FDF7E3;
+            -webkit-user-select: none; /* تعطيل تحديد النص */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .navbar {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/327c4aad7019463731697b529095eebf103b8842/dalelycover.png');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            opacity: 0.8;
-            z-index: -2;
-        }
-
-        /* طبقة شبه شفافة للخلفية */
-        .background-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(255, 255, 255, 0.8);
-            z-index: -1;
-        }
-
-        /* CSS للشاشات الكبيرة */
-        @media (min-width: 768px) {
-            .control-panel h1 {
-                font-size: 2em;
-            }
-
-            .buttons-container {
-                font-size: 1.2em;
-            }
-        }
-
-        /* CSS للشاشات الصغيرة */
-        @media (max-width: 767px) {
-            .control-panel h1 {
-                font-size: 1.6em;
-            }
-
-            .buttons-container {
-                font-size: 1em;
-            }
-        }
-
-        /* CSS مشترك */
-        .control-panel {
-            background-color: #E41C23;
-            color: white;
-            padding: 20px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
             width: 100%;
+            background-color: #FF0000;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 1000;
-            text-align: center;
         }
 
-        .control-panel h1 {
-            margin: 0;
+        .navbar-brand {
+            font-size: 1.5em;
             font-weight: bold;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .banner {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/327c4aad7019463731697b529095eebf103b8842/dalelycover.png');
+            background-size: cover;
+            background-position: center;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .banner h1 {
+            font-family: 'Amiri', serif;
+            color: #00796b;
+            font-size: 3em;
+            text-align: center;
         }
 
         .content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
-        }
-
-        /* ترتيب الأزرار بحيث يكون كل زر في سطر مستقل */
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-            max-width: 600px; /* تحديد الحد الأقصى لعرض الأزرار */
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        /* أزرار بيضاوية مع تأثيرات وتوحيد الحجم */
-        .buttons-container button {
-            background-color: #FFD700;
-            color: #333;
-            border: none;
-            cursor: pointer;
-            border-radius: 50px; /* لجعل الأزرار بيضاوية */
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            font-weight: bold;
+        .titles {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .titles h1 {
+            font-family: 'Amiri', serif;
+            color: #004d40;
+            font-size: 3em;
+            margin-bottom: 5px;
+        }
+
+        .titles h2 {
+            font-family: 'Amiri', serif;
+            color: #C11B17;
+            font-size: 2em;
+        }
+
+        .titles h3 {
+            font-family: 'Amiri', serif;
+            color: #E67451;
+            font-size: 1.5em;
+        }
+
+        .buttons-wrapper {
+            position: relative;
             width: 100%;
-            max-width: 500px; /* تحديد الحد الأقصى لعرض كل زر */
-            height: 60px; /* تحديد ارتفاع موحد لجميع الأزرار */
+            max-width: 1500px;
+            margin-bottom: 10px auto;
+        }
+
+        .buttons-container {
             display: flex;
-            justify-content: center;
+            gap: 20px;
+            position: relative;
+            padding-right: 650px;
+        }
+
+        .icon-container {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            text-align: center;
-            overflow: hidden;
-            white-space: normal; /* للسماح بتغليف النص */
-            word-wrap: break-word; /* تقسيم الكلمات الطويلة */
+            position: absolute;
+            transition: transform 0.5s linear;
         }
 
-        /* تأثير عند التمرير فوق الزر */
-        .buttons-container button:hover {
-            background-color: #FF6F61;
-        }
-
-        /* تأثير عند الضغط على الزر */
-        .buttons-container button:active {
-            transform: scale(0.95);
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        footer {
-            background-color: #333;
+        .buttons-container .icon-container a {
+            display: inline-block;
+            padding: 10px 20px;
+            width: 150px;
+            height: 150px;
+            background-color: #006400;
+            background-size: cover;
+            background-position: center;
             color: white;
-            padding: 20px;
-            width: 100%;
-            text-align: center;
+            text-decoration: none;
         }
 
-        footer p {
-            margin: 0;
+        .icon-name {
+            color: #FF0000;
+        }
+
+        .btn1 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/4ca782eab7755915ed5ea03841d425071ae67c5d/%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D9%873.png');
+        }
+
+        .btn2 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/2114d543ad76a678f0e22b5952ca2ddac09bb48c/%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85%2055.png');
+        }
+
+        .btn3 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/bf2472aee52fbbf8dfb15b247880fb214c44547d/%D8%AA%D9%88%D8%B2%D9%8A%D8%B9%20%D8%A7%D9%84%D9%85%D9%86%D9%87%D8%AC%20%D8%AC%D8%AF%D9%8A%D8%AF.png');
+        }
+
+        .btn4 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/2114d543ad76a678f0e22b5952ca2ddac09bb48c/%D8%AF%D9%81%D8%AA%D8%B1%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B6%D9%8A%D8%B155.jpg');
+        }
+
+        .btn5 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/bf2472aee52fbbf8dfb15b247880fb214c44547d/%D8%AA%D9%88%D8%B2%D9%8A%D8%B9%20%D8%A7%D9%84%D9%85%D9%86%D9%87%D8%AC.png');
+        }
+
+        .buttons-container .icon-container a:hover {
+            background-color: #2e8b57;
+        }
+
+        .buttons-container .icon-container .icon-name {
+            font-size: 1.5em;
+            margin-bottom: 150px;
         }
     </style>
 </head>
 <body>
-    <div class="background-image"></div>
-    <div class="background-overlay"></div>
+    <nav class="navbar">
+        <div class="navbar-brand">دليلي ميوزيك</div>
+        <div class="navbar-links">
+            <a href="#"><i class="fas fa-home"></i> الرئيسية</a>
+            <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
+            <a href="#"><i class="fas fa-user"></i> الفنانين</a>
+            <a href="#"><i class="fas fa-info-circle"></i> عنا</a>
+            <a href="#"><i class="fas fa-envelope"></i> اتصل بنا</a>
+        </div>
+    </nav>
 
-    <div class="control-panel">
-        <h1>DALELY MUSIC * دليلي ميوزيك</h1>
+    <div class="banner">
+        <h1> </h1>
     </div>
 
-    <div class="content">
-        <div class="buttons-container">
-            <!-- زر مسابقة التربية الموسيقية في صف مستقل في أعلى الصفحة -->
-            <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/vedio_score.html';">مسابقة التربية الموسيقية</button>
-                
-            <!-- الأزرار المتبقية مرتبة بحيث يكون كل مفتاح في صف مستقل -->
-            <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/score25app.html';">دليل معلم التربية الموسيقية</button>
-            <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/score25app.html';">دفتر التحضير</button>
-            <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/score25app.html';" >أغانى تعليمية</button>
-            <button>تحت الإنشاء</button> <!-- يمكنك إضافة أزرار إضافية هنا -->
+    <div class="titles">
+        <h1>مرحبًا بك في دليلي ميوزيك</h1>
+        <h2>أدوات معلم التربية الموسيقية</h2>
+        <h3>اضغط على الأيقونة</h3>
+    </div>
+
+    <div class="buttons-wrapper">
+        <div class="buttons-container" id="buttonsContainer">
+            <div class="icon-container">
+                <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html" class="btn1"></a>
+                <span class="icon-name">مسابقة المراحل</span>
+            </div>
+            <div class="icon-container">
+                <a href="#لينك دليل المعلم" class="btn2"></a>
+                <span class="icon-name">دليل المعلم</span>
+            </div>
+            <div class="icon-container">
+                <a href="#توزيع المنهج رابط" class="btn3"></a>
+                <span class="icon-name">توزيع المنهج</span>
+            </div>
+            <div class="icon-container">
+                <a href="https://raw.githubusercontent.com/mosabka25/mosabaka25/312bdc56300a06e75c1df0e16a490a8a82846813/%D8%AF%D9%81%D8%AA%D8%B1%20%D8%A7%D9%84%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1.jpeg" class="btn4"></a>
+                <span class="icon-name">دفتر التحضير</span>
+            </div>
+            <div class="icon-container">
+                <a href="#لينك أغانى تعليمية" class="btn5"></a>
+                <span class="icon-name">أغاني تعليمية</span>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <p>DALELY MUSIC * دليلي ميوزيك</p>
+    <script>
+        const container = document.getElementById('buttonsContainer');
+        const iconWidth = 170; 
+        let positions = [];
+
+        function createIcon(icon, index) {
+            const div = document.createElement('div');
+            div.className = 'icon-container';
+            div.innerHTML = icon.innerHTML;
+            div.style.transform = `translateX(${index * iconWidth}px)`;
+            container.appendChild(div);
+            positions.push(index * iconWidth);
+        }
+
+        const originalChildren = Array.from(container.children); 
+        container.innerHTML = ''; 
+
+        originalChildren.forEach((icon, index) => createIcon(icon, index));
+
+        function moveIcons() {
+            const icons = container.children;
+            for (let i = 0; i < icons.length; i++) {
+                positions[i] -= 1; 
+                if (positions[i] < -iconWidth) {
+                    positions[i] = (icons.length - 1) * iconWidth;
+                }
+                icons[i].style.transform = `translateX(${positions[i]}px)`;
+            }
+            requestAnimationFrame(moveIcons);
+        }
+
+        moveIcons();
+
+        // تعطيل النقر بالزر الأيمن
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // تعطيل اختصارات أدوات المطورين
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) || 
+                (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) || 
+                (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) || 
+                (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
+                return false;
+            }
+        }
+
+        // حذف البيانات الحساسة عند محاولة مغادرة الصفحة أو حفظها
+        window.addEventListener('beforeunload', function(e) {
+            document.documentElement.innerHTML = ""; // حذف كافة محتويات الصفحة
+            console.log("تم حذف جميع الأكواد الحساسة.");
+            e.preventDefault();  // إظهار رسالة التأكيد
+            e.returnValue = '';  // عرض رسالة التأكيد الافتراضية في بعض المتصفحات
+        });
+    </script>
+
+    <footer style="background-color: black; color: white; text-align: center; padding: 20px; position: fixed; bottom: 0; width: 100%; font-family: 'Amiri', serif; font-size: 0.8em;">
+        <p>دليلي ميوزيك | Dalely Music</p>
     </footer>
 </body>
 </html>
