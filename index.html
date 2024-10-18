@@ -114,15 +114,18 @@
         }
 
         .buttons-wrapper .icon-container a {
-    display: block; /* يجعل الأيقونة كتلة */
-    width: 100%; /* عرض الأيقونة */
-    height: 300px; /* ارتفاع الأيقونة */
+    display: block;
+    width: 100%;
+    height: 30vw; /* ارتفاع نسبي لعرض الشاشة */
+    max-height: 300px; /* حد أقصى للارتفاع */
+    max-width: 500px; /* حد أقصى للعرض */
     background-color: #006400;
-    background-size: cover; /* تأكد من عرض الصورة كاملة */
+    background-size: contain; /* تغيير من cover إلى contain */
     background-position: center;
-    margin: 0 auto; /* محاذاة الأيقونة في الوسط */
-    border-radius: 10px; /* إضافة زوايا دائرية */
-    transition: transform 0.3s; /* تأثير تكبير عند التحويم */
+    background-repeat: no-repeat; /* منع تكرار الصورة */
+    margin: 0 auto;
+    border-radius: 10px;
+    transition: transform 0.3s;
 }
 
 .buttons-wrapper .icon-container a:hover {
