@@ -101,17 +101,17 @@
         }
 
         .buttons-wrapper .icon-container {
-    width: 100%; /* تأكد من أن الحاوية تأخذ العرض الكامل */
-    padding-bottom: 133.33%; /* يجعل الارتفاع مساويًا للعرض */
-    position: relative; /* للسماح بوضع العنصر a بشكل مطلق داخله */
+    width: 120px; /* عرض الحاوية */
+    height: 120px; /* ارتفاع الحاوية */
+    position: relative; /* السماح بعنصر a داخلها */
+    margin: 0 auto 40px auto; /* محاذاة الحاوية في الوسط مع إضافة مسافة سفلية */
+    text-align: center; /* محاذاة النص في الوسط */
 }
 
 .buttons-wrapper .icon-container a {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    display: block; /* تأكد من أن الأيقونة كتلة */
+    width: 100%;
+    height: 100%;
     background-color: #006400;
     background-size: contain;
     background-position: center;
@@ -120,18 +120,18 @@
     transition: transform 0.3s;
 }
 
-
 .buttons-wrapper .icon-container a:hover {
-    transform: scale(1.2); /* تكبير الأيقونة عند التحويم */
+    transform: scale(1.2); /* تأثير تكبير عند التحويم */
 }
 
+.icon-name {
+    font-size: 1.7em; /* حجم النص */
+    color: red; /* لون النص */
+    margin-top: 10px; /* مسافة بين الأيقونة والاسم */
+    font-weight: bold; /* نص غامق */
+    text-align: center; /* محاذاة النص في الوسط */
+}
 
-        .icon-name {
-            font-size: 1.7em; /* حجم النص */
-            color: #FF0000;
-            text-align: center;
-            margin-top: 10px; /* مسافة بين الأيقونة والاسم */
-        }
 
         /* تعريف الخلفيات لكل أيقونة */
         .btn1 {
@@ -153,13 +153,10 @@
         .btn5 {
             background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/bf2472aee52fbbf8dfb15b247880fb214c44547d/%D8%AA%D9%88%D8%B2%D9%8A%D8%B9%20%D8%A7%D9%84%D9%85%D9%86%D9%87%D8%AC.png');
         }
-
-        }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        
         <div class="navbar-links">
             <a href="#"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
