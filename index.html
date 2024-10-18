@@ -2,12 +2,11 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>دليلي ميوزيك</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap" rel="stylesheet">
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -17,7 +16,7 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #FDF7E3;
-            -webkit-user-select: none; /* تعطيل تحديد النص */
+            -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
@@ -28,7 +27,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #FF0000;
+            background-color: #C11B17;
             color: white;
             padding: 10px 20px;
             display: flex;
@@ -57,7 +56,7 @@
             background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/327c4aad7019463731697b529095eebf103b8842/dalelycover.png');
             background-size: cover;
             background-position: center;
-            height: 350px;
+            height: 30vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -67,7 +66,7 @@
         .banner h1 {
             font-family: 'Amiri', serif;
             color: #00796b;
-            font-size: 3em;
+            font-size: 5vw;
             text-align: center;
         }
 
@@ -112,7 +111,7 @@
             display: flex;
             gap: 20px;
             position: relative;
-            padding-right: 650px;
+            padding-right: 20vw;
         }
 
         .icon-container {
@@ -126,8 +125,8 @@
         .buttons-container .icon-container a {
             display: inline-block;
             padding: 10px 20px;
-            width: 150px;
-            height: 150px;
+            width: 15vw;
+            height: 15vw;
             background-color: #006400;
             background-size: cover;
             background-position: center;
@@ -167,6 +166,21 @@
             font-size: 1.5em;
             margin-bottom: 150px;
         }
+
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.2em;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+                padding-right: 0;
+            }
+
+            .icon-container {
+                margin-bottom: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -175,7 +189,9 @@
         <div class="navbar-links">
             <a href="#"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
-            <a href="#"><i class="fas fa-user"></i> الفنانين</a>
+            <a href="#"><i class="fas fa-person-chalkboard"></i> دليل المعلم</a>
+            <a href="#"><i class="fas fa-book-open"></i> دفتر التحضير</a>
+            <a href="#"><i class="fas fa-guitar"></i> أغاني تعليمية</a>
             <a href="#"><i class="fas fa-info-circle"></i> عنا</a>
             <a href="#"><i class="fas fa-envelope"></i> اتصل بنا</a>
         </div>
@@ -238,7 +254,7 @@
         function moveIcons() {
             const icons = container.children;
             for (let i = 0; i < icons.length; i++) {
-                positions[i] -= 1; 
+                positions[i] -= 0.5; 
                 if (positions[i] < -iconWidth) {
                     positions[i] = (icons.length - 1) * iconWidth;
                 }
@@ -249,12 +265,10 @@
 
         moveIcons();
 
-        // تعطيل النقر بالزر الأيمن
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
         });
 
-        // تعطيل اختصارات أدوات المطورين
         document.onkeydown = function(e) {
             if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) || 
                 (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) || 
