@@ -37,26 +37,26 @@
         }
 
         .navbar-brand {
-            font-size: 1.5em;
+            font-size: 1.3em;
             font-weight: bold;
         }
 
         .navbar-links {
             display: flex;
-            gap: 20px;
+            gap: 15px;
         }
 
         .navbar-links a {
             color: white;
             text-decoration: none;
-            font-size: 1em;
+            font-size: 0.9em;
         }
 
         .banner {
             background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/327c4aad7019463731697b529095eebf103b8842/dalelycover.png');
             background-size: cover;
             background-position: center;
-            height: 30vh;
+            height: 25vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -66,7 +66,7 @@
         .banner h1 {
             font-family: 'Amiri', serif;
             color: #00796b;
-            font-size: 5vw;
+            font-size: 4vw;
             text-align: center;
         }
 
@@ -84,20 +84,20 @@
         .titles h1 {
             font-family: 'Amiri', serif;
             color: #004d40;
-            font-size: 3em;
+            font-size: 2em;
             margin-bottom: 5px;
         }
 
         .titles h2 {
             font-family: 'Amiri', serif;
             color: #C11B17;
-            font-size: 2em;
+            font-size: 1.5em;
         }
 
         .titles h3 {
             font-family: 'Amiri', serif;
             color: #E67451;
-            font-size: 1.5em;
+            font-size: 1.2em;
         }
 
         .buttons-wrapper {
@@ -109,24 +109,26 @@
 
         .buttons-container {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
             gap: 20px;
             position: relative;
-            padding-right: 62vw;
+            padding: 0 10px;
         }
 
         .icon-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: absolute;
-            transition: transform 0.5s linear;
+            width: 22vw;
+            height: 22vw;
         }
 
         .buttons-container .icon-container a {
             display: inline-block;
-            padding: 10px 20px;
-            width: 20vw;
-            height: 25vw;
+            padding: 10px;
+            width: 100%;
+            height: 100%;
             background-color: #006400;
             background-size: cover;
             background-position: center;
@@ -135,7 +137,10 @@
         }
 
         .icon-name {
+            margin-top: 10px;
+            font-size: 1em;
             color: #FF0000;
+            text-align: center;
         }
 
         .btn1 {
@@ -162,30 +167,30 @@
             background-color: #2e8b57;
         }
 
-        .buttons-container .icon-container .icon-name {
-            font-size: 1.5em;
-            margin-bottom: 150px;
-        }
-
         @media (max-width: 768px) {
             .navbar-brand {
-                font-size: 1.2em;
+                font-size: 1.1em;
             }
 
             .buttons-container {
-                flex-direction: column;
                 padding-right: 0;
+                gap: 15px;
             }
 
             .icon-container {
-                margin-bottom: 20px;
+                width: 30vw;
+                height: 30vw;
+            }
+
+            .icon-name {
+                font-size: 0.9em;
             }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        
+        <div class="navbar-brand">دليلي ميوزيك</div>
         <div class="navbar-links">
             <a href="#"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
