@@ -114,20 +114,21 @@
         }
 
         .buttons-wrapper .icon-container a {
-            display: block; /* جعل الأيقونة كتلة */
-            width: 120px; /* عرض الأيقونة */
-            height: 120px; /* ارتفاع الأيقونة */
-            background-color: #006400;
-            background-size: cover;
-            background-position: center;
-            margin: 0 auto; /* محاذاة الأيقونة في الوسط */
-            border-radius: 10px; /* إضافة زوايا دائرية */
-            transition: transform 0.3s; /* تأثير تكبير عند التحويم */
-        }
+    display: block; /* يجعل الأيقونة كتلة */
+    width: 120px; /* عرض الأيقونة */
+    height: 120px; /* ارتفاع الأيقونة */
+    background-color: #006400;
+    background-size: contain; /* تأكد من عرض الصورة كاملة */
+    background-position: center;
+    margin: 0 auto; /* محاذاة الأيقونة في الوسط */
+    border-radius: 10px; /* إضافة زوايا دائرية */
+    transition: transform 0.3s; /* تأثير تكبير عند التحويم */
+}
 
-        .buttons-wrapper .icon-container a:hover {
-            transform: scale(1.1); /* تكبير الأيقونة عند التحويم */
-        }
+.buttons-wrapper .icon-container a:hover {
+    transform: scale(1.1); /* تكبير الأيقونة عند التحويم */
+}
+
 
         .icon-name {
             font-size: 1.2em; /* حجم النص */
