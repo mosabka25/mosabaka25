@@ -100,33 +100,26 @@
             font-size: 1.2em;
         }
 
-        .buttons-wrapper {
-            width: 100%;
-            display: flex;
-            flex-direction: column; /* عرض العمود */
-            align-items: center; /* محاذاة في الوسط */
-        }
+        .buttons-wrapper .icon-container {
+    width: 100%; /* تأكد من أن الحاوية تأخذ العرض الكامل */
+    padding-bottom: 100%; /* يجعل الارتفاع مساويًا للعرض */
+    position: relative; /* للسماح بوضع العنصر a بشكل مطلق داخله */
+}
 
-        .icon-container {
-            text-align: center;
-            margin-bottom: 40px; /* مسافة بين الأيقونات */
-            width: 100%; /* جعل الأيقونة تأخذ العرض الكامل */
-        }
-
-        .buttons-wrapper .icon-container a {
-    display: block;
-    width: 100%;
-    height: 30vw; /* ارتفاع نسبي لعرض الشاشة */
-    max-height: 300px; /* حد أقصى للارتفاع */
-    max-width: 500px; /* حد أقصى للعرض */
+.buttons-wrapper .icon-container a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: #006400;
-    background-size: contain; /* تغيير من cover إلى contain */
+    background-size: contain;
     background-position: center;
-    background-repeat: no-repeat; /* منع تكرار الصورة */
-    margin: 0 auto;
+    background-repeat: no-repeat;
     border-radius: 10px;
     transition: transform 0.3s;
 }
+
 
 .buttons-wrapper .icon-container a:hover {
     transform: scale(1.2); /* تكبير الأيقونة عند التحويم */
