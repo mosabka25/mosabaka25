@@ -100,45 +100,43 @@
             font-size: 1.2em;
         }
 
-        /* شبكة الأيقونات */
         .buttons-wrapper {
             width: 100%;
             display: flex;
-            justify-content: center;
-        }
-
-        .buttons-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* ثلاثة أيقونات لكل صف */
-            gap: 20px;
-            width: 90%;
-            max-width: 900px;
+            flex-direction: column; /* عرض العمود */
+            align-items: center; /* محاذاة في الوسط */
         }
 
         .icon-container {
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin-bottom: 20px; /* مسافة بين الأيقونات */
+            width: 100%; /* جعل الأيقونة تأخذ العرض الكامل */
         }
 
-        .buttons-container .icon-container a {
-            display: inline-block;
-            width: 100px;
-            height: 100px;
+        .buttons-wrapper .icon-container a {
+            display: block; /* جعل الأيقونة كتلة */
+            width: 120px; /* عرض الأيقونة */
+            height: 120px; /* ارتفاع الأيقونة */
             background-color: #006400;
             background-size: cover;
             background-position: center;
-            margin-bottom: 10px;
-            text-decoration: none;
+            margin: 0 auto; /* محاذاة الأيقونة في الوسط */
+            border-radius: 10px; /* إضافة زوايا دائرية */
+            transition: transform 0.3s; /* تأثير تكبير عند التحويم */
+        }
+
+        .buttons-wrapper .icon-container a:hover {
+            transform: scale(1.1); /* تكبير الأيقونة عند التحويم */
         }
 
         .icon-name {
-            font-size: 1em;
+            font-size: 1.2em; /* حجم النص */
             color: #FF0000;
             text-align: center;
+            margin-top: 5px; /* مسافة بين الأيقونة والاسم */
         }
 
+        /* تعريف الخلفيات لكل أيقونة */
         .btn1 {
             background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/4ca782eab7755915ed5ea03841d425071ae67c5d/%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D9%873.png');
         }
@@ -152,7 +150,7 @@
         }
 
         .btn4 {
-            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/2114d543ad76a678f0e22b5952ca2ddac09bb48c/%D8%AF%D9%81%D8%AA%D8%B1%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B6%D9%8A%D8%B155.jpg');
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/c5ab9aca1d618bc9e55892534e25a6e2d2524bd6/%D8%AF%D9%81%D8%AA%D8%B1%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B6%D9%8A%D8%B155.jpg');
         }
 
         .btn5 {
@@ -164,39 +162,31 @@
                 font-size: 1.1em;
             }
 
-            .buttons-container {
-                grid-template-columns: repeat(2, 1fr); /* صفين في الشاشات الأصغر */
-            }
-
-            .buttons-container .icon-container a {
-                width: 80px;
-                height: 80px;
+            .buttons-wrapper .icon-container a {
+                width: 90px; /* تقليل حجم الأيقونة في الشاشات الأصغر */
+                height: 90px;
             }
 
             .icon-name {
-                font-size: 0.9em;
+                font-size: 1em; /* تقليل حجم النص في الشاشات الأصغر */
             }
         }
 
         @media (max-width: 480px) {
-            .buttons-container {
-                grid-template-columns: 1fr; /* أيقونة واحدة لكل صف في الشاشات الصغيرة جدًا */
-            }
-
-            .buttons-container .icon-container a {
-                width: 70px;
-                height: 70px;
+            .buttons-wrapper .icon-container a {
+                width: 90%; /* جعل الأيقونة تأخذ 90% من العرض */
+                height: 70px; /* تقليل ارتفاع الأيقونة في الشاشات الصغيرة جدًا */
             }
 
             .icon-name {
-                font-size: 0.8em;
+                font-size: 0.8em; /* تقليل حجم النص في الشاشات الصغيرة جدًا */
             }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <div class="navbar-brand">دليلي ميوزيك</div>
+        
         <div class="navbar-links">
             <a href="#"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
@@ -214,56 +204,33 @@
 
     <div class="titles">
         <h1>مرحبًا بك في دليلي ميوزيك</h1>
-        <h2>أدوات معلم التربية الموسيقية</h2>
-        <h3>اضغط على الأيقونة</h3>
+        <h2>استمتع بأفضل محتوى تعليمي وفني</h2>
+        <h3>اكتشف أغاني جديدة وأفكار تعليمية</h3>
     </div>
 
-    <div class="buttons-wrapper">
-        <div class="buttons-container">
+    <div class="content">
+        <div class="buttons-wrapper">
             <div class="icon-container">
-                <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html" class="btn1"></a>
+                <a href="link1" class="btn1"></a>
                 <span class="icon-name">مسابقة المراحل</span>
             </div>
             <div class="icon-container">
-                <a href="#لينك دليل المعلم" class="btn2"></a>
+                <a href="link2" class="btn2"></a>
                 <span class="icon-name">دليل المعلم</span>
             </div>
             <div class="icon-container">
-                <a href="#توزيع المنهج رابط" class="btn3"></a>
+                <a href="link3" class="btn3"></a>
                 <span class="icon-name">توزيع المنهج</span>
             </div>
             <div class="icon-container">
-                <a href="https://raw.githubusercontent.com/mosabka25/mosabaka25/312bdc56300a06e75c1df0e16a490a8a82846813/%D8%AF%D9%81%D8%AA%D8%B1%20%D8%A7%D9%84%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1.jpeg" class="btn4"></a>
+                <a href="link4" class="btn4"></a>
                 <span class="icon-name">دفتر التحضير</span>
             </div>
             <div class="icon-container">
-                <a href="#لينك أغانى تعليمية" class="btn5"></a>
-                <span class="icon-name">أغاني تعليمية</span>
+                <a href="link5" class="btn5"></a>
+                <span class="icon-name">أغانى تعليمية</span>
             </div>
         </div>
     </div>
-
-    <footer style="background-color: black; color: white; text-align: center; padding: 20px; position: fixed; bottom: 0; width: 100%; font-family: 'Amiri', serif; font-size: 0.8em;">
-        <p>دليلي ميوزيك | Dalely Music</p>
-    </footer>
-
-    <script>
-        // تعطيل النقر بالزر الأيمن
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // تعطيل نسخ النص
-        document.onselectstart = function() {
-            return false;
-        }
-
-        // تعطيل اختصارات النسخ والقص في المتصفح
-        document.onkeydown = function(e) {
-            if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 85 || e.keyCode === 83)) {
-                e.preventDefault();
-            }
-        }
-    </script>
 </body>
 </html>
