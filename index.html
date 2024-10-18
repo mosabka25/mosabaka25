@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>دليلي ميوزيك</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -59,7 +60,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 10px;
+            margin-top: 50px;
         }
 
         .banner h1 {
@@ -99,44 +100,40 @@
             font-size: 1.2em;
         }
 
+        /* شبكة الأيقونات */
         .buttons-wrapper {
-            position: relative;
             width: 100%;
-            max-width: 1500px;
-            margin-bottom: 10px auto;
+            display: flex;
+            justify-content: center;
         }
 
         .buttons-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 20px;
-            position: relative;
-            padding: 0 10px;
+            width: 90%;
+            max-width: 900px;
         }
 
         .icon-container {
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 22vw;
-            height: 22vw;
         }
 
         .buttons-container .icon-container a {
             display: inline-block;
-            padding: 10px;
-            width: 100%;
-            height: 100%;
+            width: 150px;
+            height: 150px;
             background-color: #006400;
             background-size: cover;
             background-position: center;
-            color: white;
+            margin-bottom: 10px;
             text-decoration: none;
         }
 
         .icon-name {
-            margin-top: 10px;
             font-size: 1em;
             color: #FF0000;
             text-align: center;
@@ -162,23 +159,14 @@
             background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/bf2472aee52fbbf8dfb15b247880fb214c44547d/%D8%AA%D9%88%D8%B2%D9%8A%D8%B9%20%D8%A7%D9%84%D9%85%D9%86%D9%87%D8%AC.png');
         }
 
-        .buttons-container .icon-container a:hover {
-            background-color: #2e8b57;
-        }
-
         @media (max-width: 768px) {
             .navbar-brand {
                 font-size: 1.1em;
             }
 
-            .buttons-container {
-                padding-right: 0;
-                gap: 15px;
-            }
-
-            .icon-container {
-                width: 30vw;
-                height: 30vw;
+            .buttons-container .icon-container a {
+                width: 80px;
+                height: 80px;
             }
 
             .icon-name {
@@ -189,7 +177,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="navbar-brand">دليلي ميوزيك</div>
+        
         <div class="navbar-links">
             <a href="#"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
@@ -212,7 +200,7 @@
     </div>
 
     <div class="buttons-wrapper">
-        <div class="buttons-container" id="buttonsContainer">
+        <div class="buttons-container">
             <div class="icon-container">
                 <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html" class="btn1"></a>
                 <span class="icon-name">مسابقة المراحل</span>
@@ -235,53 +223,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        const container = document.getElementById('buttonsContainer');
-        const iconWidth = 170; 
-        let positions = [];
-
-        function createIcon(icon, index) {
-            const div = document.createElement('div');
-            div.className = 'icon-container';
-            div.innerHTML = icon.innerHTML;
-            div.style.transform = `translateX(${index * iconWidth}px)`;
-            container.appendChild(div);
-            positions.push(index * iconWidth);
-        }
-
-        const originalChildren = Array.from(container.children); 
-        container.innerHTML = ''; 
-
-        originalChildren.forEach((icon, index) => createIcon(icon, index));
-
-        function moveIcons() {
-            const icons = container.children;
-            for (let i = 0; i < icons.length; i++) {
-                positions[i] -= 0.5; 
-                if (positions[i] < -iconWidth) {
-                    positions[i] = (icons.length - 1) * iconWidth;
-                }
-                icons[i].style.transform = `translateX(${positions[i]}px)`;
-            }
-            requestAnimationFrame(moveIcons);
-        }
-
-        moveIcons();
-
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        document.onkeydown = function(e) {
-            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) || 
-                (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) || 
-                (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) || 
-                (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
-                return false;
-            }
-        }
-    </script>
 
     <footer style="background-color: black; color: white; text-align: center; padding: 20px; position: fixed; bottom: 0; width: 100%; font-family: 'Amiri', serif; font-size: 0.8em;">
         <p>دليلي ميوزيك | Dalely Music</p>
