@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>دليل المعلم</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FDF7E3;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #C11B17;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .banner {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/327c4aad7019463731697b529095eebf103b8842/dalelycover.png');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .banner h1 {
+            font-family: 'Amiri', serif;
+            color: #00796b;
+            font-size: 4vw;
+            text-align: center;
+        }
+
+        .content {
+            padding: 80px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .titles {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .titles h1 {
+            font-family: 'Amiri', serif;
+            color: #004d40;
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .titles h2 {
+            font-family: 'Amiri', serif;
+            color: #C11B17;
+            font-size: 1.5em;
+        }
+
+        .titles h3 {
+            font-family: 'Amiri', serif;
+            color: #E67451;
+            font-size: 1.2em;
+        }
+
+.buttons-wrapper .icon-container {
+    width: 40vw; /* عرض الأيقونة يكون 40% من عرض الشاشة */
+    height: 40vw; /* ارتفاع الأيقونة يكون 40% من عرض الشاشة */
+    position: relative; /* يسمح بوضع الأيقونة والنص داخله */
+    margin: 0 auto 40px auto; /* محاذاة الحاوية في الوسط مع مسافة سفلية */
+    text-align: center; /* محاذاة النص في الوسط */
+}
+
+.buttons-wrapper .icon-container a {
+    display: block;
+    width: 100%; /* الأيقونة تأخذ العرض الكامل للحاوية */
+    height: 100%; /* الأيقونة تأخذ الارتفاع الكامل للحاوية */
+    background-color: #006400;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.buttons-wrapper .icon-container a:hover {
+    transform: scale(1.1); /* تكبير الأيقونة عند التحويم */
+}
+
+.icon-name {
+    font-size: 2vw; /* حجم النص يعتمد على عرض الشاشة */
+    color: red; /* لون الخط */
+    margin-top: 15px; /* مسافة بين الأيقونة والاسم */
+    font-weight: bold; /* نص غامق */
+    text-align: center; /* محاذاة النص في الوسط */
+}
+
+/* تخصيص لأجهزة الموبايل */
+@media (max-width: 768px) {
+    .buttons-wrapper .icon-container {
+        width: 50vw; /* عرض الأيقونة 50% من عرض الشاشة في الشاشات الصغيرة */
+        height: 50vw; /* ارتفاع الأيقونة 50% من عرض الشاشة */
+        margin-bottom: 40px; /* تقليل المسافة بين الأيقونات */
+    }
+
+    .icon-name {
+        font-size: 5vw; /* تكبير حجم النص على الشاشات الصغيرة */
+    
+}
+
+    color: red; /* لون النص */
+    margin-top: 20px; /* مسافة بين الأيقونة والاسم */
+    font-weight: bold; /* نص غامق */
+    text-align: center; /* محاذاة النص في الوسط */
+}
+
+
+        /* تعريف الخلفيات لكل أيقونة */
+        .btn1 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/6c24941b1901807b5920780c6128a61b5ddd1a16/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_1.jpg');
+        }
+
+        .btn2 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/6c24941b1901807b5920780c6128a61b5ddd1a16/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3%20%D8%AA%D9%8A%D8%B1%D9%85%20%D8%A7%D9%88%D9%84_1.jpg');
+        }
+
+        .btn3 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/6c24941b1901807b5920780c6128a61b5ddd1a16/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3%20%D8%AA%D9%8A%D8%B1%D9%85%20%D8%AB%D8%A7%D9%86%D9%89_1.jpg');
+        }
+
+        .btn4 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/6c24941b1901807b5920780c6128a61b5ddd1a16/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3%20%D8%AA%D9%8A%D8%B1%D9%85%20%D8%A7%D9%88%D9%84_1.jpg');
+        }
+
+        .btn5 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/6c24941b1901807b5920780c6128a61b5ddd1a16/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3%20%D8%AA%D9%8A%D8%B1%D9%85%20%D8%AB%D8%A7%D9%86%D9%89_1.jpg');
+        }
+
+.btn6 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/6c24941b1901807b5920780c6128a61b5ddd1a16/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%A3%D9%88%D9%84%20%D8%A7%D9%84%D8%A3%D8%B9%D8%AF%D8%A7%D8%AF%D9%89%20%D8%AA%D9%8A%D8%B1%D9%85%20%D8%A7%D9%88%D9%84_1.jpg');
+        }
+
+.btn7 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/7bd6434253ebf19049cbf360c62bf51a7a3eb91f/2p1.jpg');
+        }
+
+        .btn8 {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/7bd6434253ebf19049cbf360c62bf51a7a3eb91f/3p1.jpg');
+        }
+
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-links">
+            <a href="#"><i class="fas fa-home"></i> الرئيسية</a>
+            <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
+            <a href="#"><i class="fas fa-person-chalkboard"></i> دليل المعلم</a>
+            <a href="#"><i class="fas fa-book-open"></i> دفتر التحضير</a>
+            <a href="#"><i class="fas fa-guitar"></i> أغاني تعليمية</a>
+                        <a href="#"><i class="fas fa-envelope"></i> اتصل بنا</a>
+        </div>
+    </nav>
+
+    <div class="banner">
+        <h1> </h1>
+    </div>
+
+    <div class="titles">
+        <h1>دليل المعلم</h1>
+        <h2> لمرحلتى الإبتدائي والإعدادي </h2>
+        <h3>إضغط على الأيقونة</h3>
+    </div>
+
+    <div class="content">
+        <div class="buttons-wrapper">
+        <div class="buttons-container" id="buttonsContainer">
+            <div class="icon-container">
+                <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html" class="btn1"></a> 
+                <span class="icon-name">الصف الرابع الإبتدائي</span>
+            </div>
+            <div class="icon-container">
+                <a href="#لينك دليل المعلم" class="btn2"></a>
+                <span class="icon-name">الصف الخامس الإبتدائي _ تيرم أول</span>
+            </div>
+<div class="icon-container">
+                <a href="#لينك دليل المعلم" class="btn3"></a>
+                <span class="icon-name">الصف الخامس الإبتدائي _ تيرم ثانِ</span>
+            </div>
+
+            <div class="icon-container">
+                <a href="#توزيع المنهج رابط" class="btn4"></a>
+                <span class="icon-name">الصف السادس الإبتدائي_ تيرم أول</span>
+            </div>
+<div class="icon-container">
+                <a href="#توزيع المنهج رابط" class="btn5"></a>
+                <span class="icon-name">الصف السادس الإبتدائي_ تيرم ثان</span>
+            </div>
+
+
+            <div class="icon-container">
+                <a href="#" class="btn6"></a>
+                <span class="icon-name">الصف الأول الإعدادي_ تيرم أول</span>
+            </div>
+
+            <div class="icon-container">
+                <a href="#لينك أغانى تعليمية" class="btn7"></a>
+                <span class="icon-name">الصف الثاني الإعدادي  تيرم أول_1</span></div>
+
+<div class="icon-container">
+                <a href="#لينك أغانى تعليمية" class="btn8"></a>
+                <span class="icon-name">الصف الثالث الإعدادي</span>
+        </div>
+    </div>
+<footer>
+    <p>دليل المعلم</p>
+</footer>
+
+</body>
+</html>
