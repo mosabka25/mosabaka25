@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل معلم الصف الخامس الإبتدائي _ تيرم ثانِ</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-color: #FDF7E3;
+            color: #333;
+            opacity: 0.8;
+        }
+
+        /* صورة الخلفية المتكيفة */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/0ca8773a7f834bb3b0d2d84602f0c48c7d2b6e23/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3%20%D8%AA%D9%8A%D8%B1%D9%85%20%D8%AB%D8%A7%D9%86%D9%89_1.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        #control-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #E41C23;
+            padding: 1em;
+            color: white;
+            z-index: 1000;
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #control-panel button {
+            background-color: #FFD700;
+            color: #333;
+            padding: 0.8em 1.5em;
+            border: none;
+            border-radius: 0.625em;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 0 0.5em;
+            transition: background-color 0.3s ease;
+        }
+
+        #control-panel button:hover {
+            background-color: #FF6F61;
+            color: white;
+        }
+
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 6.25em; /* لضمان عدم التداخل مع لوحة التحكم */
+            margin-bottom: 1.25em;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1.25em;
+            border-radius: 0.625em;
+            box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 1.25em;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.25em;
+        }
+
+        footer button {
+            background-color: #FFD700;
+            color: #333;
+            padding: 0.8em 1.5em;
+            border: none;
+            border-radius: 0.625em;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        footer button:hover {
+            background-color: #FF6F61;
+            color: white;
+        }
+
+        /* أنماط عارض PDF */
+        #pdf-viewer {
+            width: 100%;
+            height: 50em;
+            border: 1px solid #ccc;
+            margin-top: 1.25em;
+        }
+
+        .pdf-controls {
+            margin-top: 0.625em;
+        }
+
+        .pdf-controls input {
+            width: 3.125em;
+        }
+
+        /* استعلامات الوسائط */
+        @media only screen and (max-width: 48em) {
+            .image-container {
+                margin-top: 5em;
+            }
+            #control-panel {
+                padding: 0.625em;
+            }
+            #control-panel button {
+                padding: 0.5em 1em;
+                font-size: 0.9em;
+            }
+            footer button {
+                padding: 0.5em 1em;
+                font-size: 0.9em;
+            }
+        }
+
+        @media only screen and (max-width: 30em) {
+            .image-container {
+                margin-top: 3.75em;
+            }
+            #control-panel {
+                padding: 0.3125em;
+            }
+            #control-panel button {
+                padding: 0.375em 0.75em;
+                font-size: 0.8em;
+            }
+            footer button {
+                padding: 0.375em 0.75em;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="control-panel">
+    *** دليل معلم الصف الخامس الإبتدائي _ تيرم ثان ***
+    <br>
+    <div class="controls">
+
+    </div>
+    <div class="pdf-controls">
+        <button id="prev-page">السابق</button>
+        <input type="number" id="page-num" value="2" min="1">
+        <button id="next-page">التالي</button>
+        <button id="download-page">تحميل</button>
+        <span id="page-count"></span>
+    </div>
+</div>
+
+<div class="image-container">
+    
+    <img id="image-display" src="https://raw.githubusercontent.com/mosabka25/mosabaka25/0ca8773a7f834bb3b0d2d84602f0c48c7d2b6e23/f52.jpg" alt="صورة 1">
+</div>
+
+<canvas id="pdf-viewer"></canvas>
+
+<footer>
+    <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/index.html';">الرئيسية</button>
+</footer>
+
+<script>
+    // PDF Viewer
+    const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/e5ca4bc3e102cfc64820a60a512c55c5e50cb9ac/%D8%AF%D9%84%D9%8A%D9%84%20%D9%85%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%AA%D8%B1%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%8A%D9%82%D9%8A%D8%A9%20%D9%84%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3%20%D8%A7%D9%84%D8%AA%D9%8A%D8%B1%D9%85%20%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%89pdf.pdf';
+
+
+
+
+    let pdfDoc = null,
+        pageNum = 1,
+        pageRendering = false,
+        pageNumPending = null,
+        scale = 1.5,
+        canvas = document.getElementById('pdf-viewer'),
+        ctx = canvas.getContext('2d');
+
+    function renderPage(num) {
+        pageRendering = true;
+        pdfDoc.getPage(num).then(function(page) {
+            var viewport = page.getViewport({scale: scale});
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            var renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            var renderTask = page.render(renderContext);
+
+            renderTask.promise.then(function() {
+                pageRendering = false;
+                if (pageNumPending !== null) {
+                    renderPage(pageNumPending);
+                    pageNumPending = null;
+                }
+            });
+        });
+
+        document.getElementById('page-num').value = num;
+    }
+
+    function queueRenderPage(num) {
+        if (pageRendering) {
+            pageNumPending = num;
+        } else {
+            renderPage(num);
+        }
+    }
+
+    function onPrevPage() {
+        if (pageNum <= 1) {
+            return;
+        }
+        pageNum--;
+        queueRenderPage(pageNum);
+    }
+
+    function onNextPage() {
+        if (pageNum >= pdfDoc.numPages) {
+            return;
+        }
+        pageNum++;
+        queueRenderPage(pageNum);
+    }
+
+    function downloadPage() {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL();
+        link.download = `page_${pageNum}.png`;
+        link.click();
+    }
+
+    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
+        pdfDoc = pdfDoc_;
+        document.getElementById('page-count').textContent = pdfDoc.numPages;
+        renderPage(pageNum);
+    });
+
+    document.getElementById('prev-page').addEventListener('click', onPrevPage);
+    document.getElementById('next-page').addEventListener('click', onNextPage);
+    document.getElementById('page-num').addEventListener('change', function() {
+        pageNum = parseInt(this.value);
+        queueRenderPage(pageNum);
+    });
+    document.getElementById('download-page').addEventListener('click', downloadPage);
+</script>
+
+</body>
+</html>
