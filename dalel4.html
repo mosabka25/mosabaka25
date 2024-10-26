@@ -4,16 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دليل معلم الصف الرابع الإبتدائي</title>
+      
+    <!-- مكتبات خارجية -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0px;
             text-align: center;
             background-color: #FDF7E3;
             color: #333;
-            opacity: 0.8;
+            opacity: 0.9;
+        }
+
+        /* شريط التنقل */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #C11B17;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9em;
         }
 
         /* صورة الخلفية المتكيفة */
@@ -29,15 +70,16 @@
             background-position: center;
             background-repeat: no-repeat;
             z-index: -1;
-            opacity: 0.2;
+            opacity: 0.8;
         }
 
+        /* لوحة التحكم */
         #control-panel {
             position: fixed;
-            top: 0;
+            top: 40px; /* تعديل المسافة بعد إضافة شريط التنقل */
             left: 0;
             width: 100%;
-            background-color: #E41C23;
+            background-color: #C11B17;
             padding: 1em;
             color: white;
             z-index: 1000;
@@ -57,25 +99,13 @@
             transition: background-color 0.3s ease;
         }
 
-        #control-panel button:hover {
-            background-color: #FF6F61;
-            color: white;
-        }
-
+        /* باقي التنسيقات كما هي... */
         .image-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: 6.25em; /* لضمان عدم التداخل مع لوحة التحكم */
             margin-bottom: 1.25em;
-        }
-
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 1.25em;
-            border-radius: 0.625em;
-            box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
         }
 
         footer {
@@ -90,83 +120,25 @@
             align-items: center;
             gap: 1.25em;
         }
-
-        footer button {
-            background-color: #FFD700;
-            color: #333;
-            padding: 0.8em 1.5em;
-            border: none;
-            border-radius: 0.625em;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
-
-        footer button:hover {
-            background-color: #FF6F61;
-            color: white;
-        }
-
-        /* أنماط عارض PDF */
-        #pdf-viewer {
-            width: 100%;
-            height: 50em;
-            border: 1px solid #ccc;
-            margin-top: 1.25em;
-        }
-
-        .pdf-controls {
-            margin-top: 0.625em;
-        }
-
-        .pdf-controls input {
-            width: 3.125em;
-        }
-
-        /* استعلامات الوسائط */
-        @media only screen and (max-width: 48em) {
-            .image-container {
-                margin-top: 5em;
-            }
-            #control-panel {
-                padding: 0.625em;
-            }
-            #control-panel button {
-                padding: 0.5em 1em;
-                font-size: 0.9em;
-            }
-            footer button {
-                padding: 0.5em 1em;
-                font-size: 0.9em;
-            }
-        }
-
-        @media only screen and (max-width: 30em) {
-            .image-container {
-                margin-top: 3.75em;
-            }
-            #control-panel {
-                padding: 0.3125em;
-            }
-            #control-panel button {
-                padding: 0.375em 0.75em;
-                font-size: 0.8em;
-            }
-            footer button {
-                padding: 0.375em 0.75em;
-                font-size: 0.8em;
-            }
-        }
     </style>
 </head>
 <body>
 
-<div id="control-panel">
-    *** دليل معلم الصف الرابع الإبتدائي ***
-    <br>
-    <div class="controls">
-
+<!-- إضافة شريط التنقل -->
+<nav class="navbar">
+    <div class="navbar-links">
+        <a href="https://mosabka25.github.io/mosabaka25/index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
+        <a href="https://mosabka25.github.io/mosabaka25/دليل المعلم.html"><i class="fas fa-person-chalkboard"></i> دليل المعلم</a>
+        <a href="#"><i class="fas fa-book-open"></i> دفتر التحضير</a>
+        <a href="#"><i class="fas fa-guitar"></i> أغاني تعليمية</a>
+        <a href="#"><i class="fas fa-envelope"></i> اتصل بنا</a>
     </div>
+</nav>
+
+<div id="control-panel">
+*** دليل معلم الصف الرابع الإبتدائي ***   
+    <br>
     <div class="pdf-controls">
         <button id="prev-page">السابق</button>
         <input type="number" id="page-num" value="2" min="1">
@@ -177,18 +149,22 @@
 </div>
 
 <div class="image-container">
-    
     <img id="image-display" src="https://raw.githubusercontent.com/mosabka25/mosabaka25/949f0a2d5a85753463b9546c5903b22299e29c8a/f4.jpg" alt="صورة 1">
 </div>
 
 <canvas id="pdf-viewer"></canvas>
 
 <footer>
+     
+
     <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/index.html';">الرئيسية</button>
 </footer>
 
+<!-- سكربتات العرض -->
 <script>
-    // PDF Viewer
+// نفس كود PDF Viewer هنا...
+
+ 
     const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/92f8f9d303464fcf8b4c81cf8ba7a75d2049ebb0/%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A5%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A.pdf';
 
 
@@ -272,6 +248,14 @@
     });
     document.getElementById('download-page').addEventListener('click', downloadPage);
 </script>
+
+</body>
+</html>
+<footer>
+<p>
+    للوصول إلى صفحة محدده , قم بتحديد رقم الصفحة فى المربع أو استخدام الأسهم للوصول , يمكنك الأستعانة بالفهرس المثبت أعلى الصفحة . بالنقر على تحميل يمكنك حفظ  الصفحة على الجهاز ومشاركتها
+</p>
+</footer>
 
 </body>
 </html>
