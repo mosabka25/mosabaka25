@@ -73,58 +73,49 @@
             opacity: 0.8;
         }
 
-        /* لوحة التحكم */
+        /* لوحة التحكم في أسفل الشاشة */
         #control-panel {
             position: fixed;
-            top: 40px; /* تعديل المسافة بعد إضافة شريط التنقل */
+            bottom: 0;
             left: 0;
             width: 100%;
             background-color: #C11B17;
-            padding: 1em;
+            padding: 0.5em;
             color: white;
             z-index: 1000;
             text-align: center;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5em;
         }
 
-        #control-panel button {
+        #control-panel button, #control-panel input {
             background-color: #FFD700;
             color: #333;
-            padding: 0.8em 1.5em;
+            padding: 0.5em 1em;
             border: none;
             border-radius: 0.625em;
             cursor: pointer;
-            font-size: 1em;
-            margin: 0 0.5em;
+            font-size: 0.8em;
+            margin: 0 0.2em;
             transition: background-color 0.3s ease;
         }
 
-        /* باقي التنسيقات كما هي... */
+        /* باقي التنسيقات */
         .image-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 6.25em; /* لضمان عدم التداخل مع لوحة التحكم */
-            margin-bottom: 1.25em;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 1.25em;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.25em;
+            margin-top: 6.25em; 
+            margin-bottom: 3em; /* لضمان عدم التداخل مع لوحة التحكم الجديدة */
         }
     </style>
 </head>
 <body>
 
-<!-- إضافة شريط التنقل -->
+<!-- شريط التنقل -->
 <nav class="navbar">
     <div class="navbar-links">
         <a href="https://mosabka25.github.io/mosabaka25/index.html"><i class="fas fa-home"></i> الرئيسية</a>
@@ -136,126 +127,103 @@
     </div>
 </nav>
 
-<div id="control-panel">
-*** دليل معلم الصف الرابع الإبتدائي ***   
-    <br>
-    <div class="pdf-controls">
-        <button id="prev-page">السابق</button>
-        <input type="number" id="page-num" value="2" min="1">
-        <button id="next-page">التالي</button>
-        <button id="download-page">تحميل</button>
-        <span id="page-count"></span>
-    </div>
-</div>
-
 <div class="image-container">
     <img id="image-display" src="https://raw.githubusercontent.com/mosabka25/mosabaka25/949f0a2d5a85753463b9546c5903b22299e29c8a/f4.jpg" alt="صورة 1">
 </div>
 
 <canvas id="pdf-viewer"></canvas>
 
-<footer>
-     
+<!-- لوحة التحكم كفوتر جديد -->
+<div id="control-panel">
+    <button id="prev-page">السابق</button>
+    <input type="number" id="page-num" value="2" min="1">
+    <button id="next-page">التالي</button>
+    <button id="download-page">تحميل</button>
+    <span id="page-count"></span>
+</div>
 
-    <button onclick="window.location.href='https://mosabka25.github.io/mosabaka25/index.html';">الرئيسية</button>
-</footer>
-
-<!-- سكربتات العرض -->
 <script>
-// نفس كود PDF Viewer هنا...
+// كود PDF Viewer
+const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/92f8f9d303464fcf8b4c81cf8ba7a75d2049ebb0/%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A5%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A.pdf';
 
- 
-    const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/92f8f9d303464fcf8b4c81cf8ba7a75d2049ebb0/%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A5%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A.pdf';
+let pdfDoc = null,
+    pageNum = 1,
+    pageRendering = false,
+    pageNumPending = null,
+    scale = 1.5,
+    canvas = document.getElementById('pdf-viewer'),
+    ctx = canvas.getContext('2d');
 
+function renderPage(num) {
+    pageRendering = true;
+    pdfDoc.getPage(num).then(function(page) {
+        var viewport = page.getViewport({ scale: scale });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
 
+        var renderContext = {
+            canvasContext: ctx,
+            viewport: viewport
+        };
+        var renderTask = page.render(renderContext);
 
-
-    let pdfDoc = null,
-        pageNum = 1,
-        pageRendering = false,
-        pageNumPending = null,
-        scale = 1.5,
-        canvas = document.getElementById('pdf-viewer'),
-        ctx = canvas.getContext('2d');
-
-    function renderPage(num) {
-        pageRendering = true;
-        pdfDoc.getPage(num).then(function(page) {
-            var viewport = page.getViewport({scale: scale});
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            var renderContext = {
-                canvasContext: ctx,
-                viewport: viewport
-            };
-            var renderTask = page.render(renderContext);
-
-            renderTask.promise.then(function() {
-                pageRendering = false;
-                if (pageNumPending !== null) {
-                    renderPage(pageNumPending);
-                    pageNumPending = null;
-                }
-            });
+        renderTask.promise.then(function() {
+            pageRendering = false;
+            if (pageNumPending !== null) {
+                renderPage(pageNumPending);
+                pageNumPending = null;
+            }
         });
-
-        document.getElementById('page-num').value = num;
-    }
-
-    function queueRenderPage(num) {
-        if (pageRendering) {
-            pageNumPending = num;
-        } else {
-            renderPage(num);
-        }
-    }
-
-    function onPrevPage() {
-        if (pageNum <= 1) {
-            return;
-        }
-        pageNum--;
-        queueRenderPage(pageNum);
-    }
-
-    function onNextPage() {
-        if (pageNum >= pdfDoc.numPages) {
-            return;
-        }
-        pageNum++;
-        queueRenderPage(pageNum);
-    }
-
-    function downloadPage() {
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL();
-        link.download = `page_${pageNum}.png`;
-        link.click();
-    }
-
-    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
-        pdfDoc = pdfDoc_;
-        document.getElementById('page-count').textContent = pdfDoc.numPages;
-        renderPage(pageNum);
     });
 
-    document.getElementById('prev-page').addEventListener('click', onPrevPage);
-    document.getElementById('next-page').addEventListener('click', onNextPage);
-    document.getElementById('page-num').addEventListener('change', function() {
-        pageNum = parseInt(this.value);
-        queueRenderPage(pageNum);
-    });
-    document.getElementById('download-page').addEventListener('click', downloadPage);
+    document.getElementById('page-num').value = num;
+}
+
+function queueRenderPage(num) {
+    if (pageRendering) {
+        pageNumPending = num;
+    } else {
+        renderPage(num);
+    }
+}
+
+function onPrevPage() {
+    if (pageNum <= 1) {
+        return;
+    }
+    pageNum--;
+    queueRenderPage(pageNum);
+}
+
+function onNextPage() {
+    if (pageNum >= pdfDoc.numPages) {
+        return;
+    }
+    pageNum++;
+    queueRenderPage(pageNum);
+}
+
+function downloadPage() {
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL();
+    link.download = `page_${pageNum}.png`;
+    link.click();
+}
+
+pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
+    pdfDoc = pdfDoc_;
+    document.getElementById('page-count').textContent = pdfDoc.numPages;
+    renderPage(pageNum);
+});
+
+document.getElementById('prev-page').addEventListener('click', onPrevPage);
+document.getElementById('next-page').addEventListener('click', onNextPage);
+document.getElementById('page-num').addEventListener('change', function() {
+    pageNum = parseInt(this.value);
+    queueRenderPage(pageNum);
+});
+document.getElementById('download-page').addEventListener('click', downloadPage);
 </script>
-
-</body>
-</html>
-<footer>
-<p>
-    للوصول إلى صفحة محدده , قم بتحديد رقم الصفحة فى المربع أو استخدام الأسهم للوصول , يمكنك الأستعانة بالفهرس المثبت أعلى الصفحة . بالنقر على تحميل يمكنك حفظ  الصفحة على الجهاز ومشاركتها
-</p>
-</footer>
 
 </body>
 </html>
