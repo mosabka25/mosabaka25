@@ -1,4 +1,110 @@
-<style>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل معلم الصف الرابع الإبتدائي</title>
+      
+    <!-- مكتبات خارجية -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0px;
+            text-align: center;
+            background-color: #FDF7E3;
+            color: #333;
+            opacity: 0.9;
+        }
+
+        /* شريط التنقل */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #C11B17;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        /* صورة الخلفية المتكيفة */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/3ec5989f64b24ce5069c7c44bf8561d5b4b769d4/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_1.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        /* لوحة التحكم في أسفل الشاشة */
+        #control-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #C11B17;
+            padding: 0.5em;
+            color: white;
+            z-index: 1000;
+            text-align: center;
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        #control-panel button, #control-panel input {
+            background-color: #FFD700;
+            color: #333;
+            padding: 0.5em 1em;
+            border: none;
+            border-radius: 0.625em;
+            cursor: pointer;
+            font-size: 0.8em;
+            margin: 0 0.2em;
+            transition: background-color 0.3s ease;
+        }
+
+        /* باقي التنسيقات */
+        <style>
     .image-container {
         display: flex;
         flex-direction: column;
@@ -13,4 +119,121 @@
         max-width: 90%; /* لتقليل الحجم بما يتناسب مع الشاشات المختلفة */
         max-height: 100%; /* تناسب الصورة مع حجم الحاوية */
     }
-</style>
+
+
+    </style>
+</head>
+<body>
+
+<!-- شريط التنقل -->
+<nav class="navbar">
+    <div class="navbar-links">
+        <a href="https://mosabka25.github.io/mosabaka25/index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
+        <a href="https://mosabka25.github.io/mosabaka25/دليل المعلم.html"><i class="fas fa-person-chalkboard"></i> دليل المعلم</a>
+        <a href="#"><i class="fas fa-book-open"></i> دفتر التحضير</a>
+        <a href="#"><i class="fas fa-guitar"></i> أغاني تعليمية</a>
+        <a href="#"><i class="fas fa-envelope"></i> اتصل بنا</a>
+    </div>
+</nav>
+
+<div class="image-container">
+    <img id="image-display" src="https://raw.githubusercontent.com/mosabka25/mosabaka25/949f0a2d5a85753463b9546c5903b22299e29c8a/f4.jpg" alt="صورة 1">
+</div>
+
+<canvas id="pdf-viewer"></canvas>
+
+<!-- لوحة التحكم كفوتر جديد -->
+<div id="control-panel">
+    <button id="prev-page">السابق</button>
+    <input type="number" id="page-num" value="2" min="1">
+    <button id="next-page">التالي</button>
+    <button id="download-page">تحميل</button>
+    <span id="page-count"></span>
+</div>
+
+<script>
+// كود PDF Viewer
+const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/92f8f9d303464fcf8b4c81cf8ba7a75d2049ebb0/%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A5%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A.pdf';
+
+let pdfDoc = null,
+    pageNum = 1,
+    pageRendering = false,
+    pageNumPending = null,
+    scale = 1.5,
+    canvas = document.getElementById('pdf-viewer'),
+    ctx = canvas.getContext('2d');
+
+function renderPage(num) {
+    pageRendering = true;
+    pdfDoc.getPage(num).then(function(page) {
+        var viewport = page.getViewport({ scale: scale });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        var renderContext = {
+            canvasContext: ctx,
+            viewport: viewport
+        };
+        var renderTask = page.render(renderContext);
+
+        renderTask.promise.then(function() {
+            pageRendering = false;
+            if (pageNumPending !== null) {
+                renderPage(pageNumPending);
+                pageNumPending = null;
+            }
+        });
+    });
+
+    document.getElementById('page-num').value = num;
+}
+
+function queueRenderPage(num) {
+    if (pageRendering) {
+        pageNumPending = num;
+    } else {
+        renderPage(num);
+    }
+}
+
+function onPrevPage() {
+    if (pageNum <= 1) {
+        return;
+    }
+    pageNum--;
+    queueRenderPage(pageNum);
+}
+
+function onNextPage() {
+    if (pageNum >= pdfDoc.numPages) {
+        return;
+    }
+    pageNum++;
+    queueRenderPage(pageNum);
+}
+
+function downloadPage() {
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL();
+    link.download = `page_${pageNum}.png`;
+    link.click();
+}
+
+pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
+    pdfDoc = pdfDoc_;
+    document.getElementById('page-count').textContent = pdfDoc.numPages;
+    renderPage(pageNum);
+});
+
+document.getElementById('prev-page').addEventListener('click', onPrevPage);
+document.getElementById('next-page').addEventListener('click', onNextPage);
+document.getElementById('page-num').addEventListener('change', function() {
+    pageNum = parseInt(this.value);
+    queueRenderPage(pageNum);
+});
+document.getElementById('download-page').addEventListener('click', downloadPage);
+</script>
+
+</body>
+</html>
