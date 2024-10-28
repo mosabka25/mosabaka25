@@ -167,15 +167,21 @@ let pdfDoc = null,
 function renderPage(num) {
     pageRendering = true;
     pdfDoc.getPage(num).then(function(page) {
-        var viewport = page.getViewport({ scale: scale });
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
+        // احصل على العرض المتاح على الشاشة
+        const screenWidth = window.innerWidth * 0.9; // تخصيص 90% من عرض الشاشة
+        const viewport = page.getViewport({ scale: 1.0 });
+        // ضبط القياس ليتناسب عرض الصفحة مع عرض الشاشة
+        scale = screenWidth / viewport.width;
+        
+        const scaledViewport = page.getViewport({ scale: scale });
+        canvas.height = scaledViewport.height;
+        canvas.width = scaledViewport.width;
 
-        var renderContext = {
+        const renderContext = {
             canvasContext: ctx,
-            viewport: viewport
+            viewport: scaledViewport
         };
-        var renderTask = page.render(renderContext);
+        const renderTask = page.render(renderContext);
 
         renderTask.promise.then(function() {
             pageRendering = false;
@@ -234,6 +240,7 @@ document.getElementById('page-num').addEventListener('change', function() {
 });
 document.getElementById('download-page').addEventListener('click', downloadPage);
 </script>
+
 
 </body>
 </html>
