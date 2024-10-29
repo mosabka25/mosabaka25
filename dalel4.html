@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دليل معلم الصف الرابع الإبتدائي</title>
-      
-    <!-- مكتبات خارجية -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -18,15 +16,12 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            margin: 0;
-            padding: 0px;
-            text-align: center;
             background-color: #FDF7E3;
             color: #333;
+            text-align: center;
             opacity: 0.9;
         }
 
-        /* شريط التنقل */
         .navbar {
             position: fixed;
             top: 0;
@@ -57,7 +52,8 @@
             font-size: 0.9em;
         }
 
-        /* صورة الخلفية المتكيفة */
+
+ /* صورة الخلفية المتكيفة */
         body::before {
             content: "";
             position: fixed;
@@ -73,65 +69,64 @@
             opacity: 0.8;
         }
 
-        /* لوحة التحكم في أسفل الشاشة */
+
+
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 6.25em;
+            margin-bottom: 1.25em;
+            height: calc(100vh - 200px);
+        }
+
+        .image-container img {
+            max-width: 90%;
+            max-height: 100%;
+        }
+
+        #pdf-viewer {
+            width: 100%;
+            max-width: 90vw;
+            height: auto;
+        }
+
         #control-panel {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
             background-color: #C11B17;
-            padding: 0.5em;
             color: white;
-            z-index: 1000;
-            text-align: center;
-            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 0.5em;
+            padding: 10px 0;
+            z-index: 1000;
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
         }
 
         #control-panel button, #control-panel input {
             background-color: #FFD700;
             color: #333;
-            padding: 0.5em 1em;
+            padding: 0.5em;
+            margin: 0 0.2em;
             border: none;
-            border-radius: 0.625em;
+            border-radius: 0.5em;
             cursor: pointer;
             font-size: 0.8em;
-            margin: 0 0.2em;
-            transition: background-color 0.3s ease;
         }
 
-
 #control-panel input[type="number"] {
-    width: 70px; /* تحديد عرض أصغر */
+    width: 60px; /* تحديد عرض أصغر */
 }
 
-
-        /* باقي التنسيقات */
-        <style>
-    .image-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* لتوسيط الصورة عموديًا */
-        align-items: center;    /* لتوسيط الصورة أفقيًا */
-        margin-top: 6.25em; /* لضمان عدم التداخل مع لوحة التحكم */
-        margin-bottom: 1.25em;
-        height: calc(100vh - 200px); /* لتملأ الحاوية المتاحة */
-    }
-
-    .image-container img {
-        max-width: 90%; /* لتقليل الحجم بما يتناسب مع الشاشات المختلفة */
-        max-height: 100%; /* تناسب الصورة مع حجم الحاوية */
-    }
 
 
     </style>
 </head>
 <body>
 
-<!-- شريط التنقل -->
 <nav class="navbar">
     <div class="navbar-links">
         <a href="https://mosabka25.github.io/mosabaka25/index.html"><i class="fas fa-home"></i> الرئيسية</a>
@@ -149,37 +144,36 @@
 
 <canvas id="pdf-viewer"></canvas>
 
-<!-- لوحة التحكم كفوتر جديد -->
 <div id="control-panel">
     <button id="prev-page">السابق</button>
-    <input type="number" id="page-num" value="2" min="1">
+    <input type="number" id="page-num" value="1" min="1">
     <button id="next-page">التالي</button>
     <button id="download-page">تحميل</button>
     <span id="page-count"></span>
 </div>
 
 <script>
-// كود PDF Viewer
+// إعداد PDF Viewer
 const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/92f8f9d303464fcf8b4c81cf8ba7a75d2049ebb0/%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A5%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A.pdf';
 
 let pdfDoc = null,
     pageNum = 1,
     pageRendering = false,
     pageNumPending = null,
-    scale = 1.0,
     canvas = document.getElementById('pdf-viewer'),
     ctx = canvas.getContext('2d');
 
 function renderPage(num) {
     pageRendering = true;
     pdfDoc.getPage(num).then(function(page) {
-        // احصل على العرض المتاح على الشاشة
-        const screenWidth = window.innerWidth * 0.9; // تخصيص 90% من عرض الشاشة
+        const screenWidth = window.innerWidth;
         const viewport = page.getViewport({ scale: 1.0 });
-        // ضبط القياس ليتناسب عرض الصفحة مع عرض الشاشة
-        scale = screenWidth / viewport.width;
-        
+
+        // تعيين مقياس ليتناسب مع حجم الشاشة
+        const scale = (screenWidth / viewport.width) * 1.5;
         const scaledViewport = page.getViewport({ scale: scale });
+
+        // تعيين أبعاد الكانفاس
         canvas.height = scaledViewport.height;
         canvas.width = scaledViewport.width;
 
@@ -241,12 +235,14 @@ pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
 document.getElementById('prev-page').addEventListener('click', onPrevPage);
 document.getElementById('next-page').addEventListener('click', onNextPage);
 document.getElementById('page-num').addEventListener('change', function() {
-    pageNum = parseInt(this.value);
-    queueRenderPage(pageNum);
+    const requestedPage = parseInt(this.value);
+    if (requestedPage >= 1 && requestedPage <= pdfDoc.numPages) {
+        pageNum = requestedPage;
+        queueRenderPage(pageNum);
+    }
 });
 document.getElementById('download-page').addEventListener('click', downloadPage);
 </script>
-
 
 </body>
 </html>
