@@ -130,20 +130,23 @@
         }
 
         footer {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; /* للسماح بانتقال الأزرار لأسطر متعددة على الشاشات الصغيرة */
+}
 
-        footer p {
-            margin: 0;
+footer button {
+    margin: 5px; /* لتجنب التصاق الأزرار ببعضها البعض على الشاشات الصغيرة */
+}
+
         }
     </style>
 </head>
