@@ -30,39 +30,29 @@
             color: white;
             padding: 10px 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
             z-index: 1000;
         }
 
-        .navbar-links {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .navbar-links a {
+        .navbar a {
             color: white;
             text-decoration: none;
             font-size: 0.9em;
             display: flex;
             align-items: center;
+            padding: 8px;
         }
 
-        .navbar-links a i {
+        .navbar a i {
             font-size: 1.4em;
             margin-left: 5px;
         }
 
-        .navbar-links a:hover {
+        .navbar a:hover {
             text-decoration: underline;
-        }
-
-        @media (max-width: 600px) {
-            .navbar-links {
-                flex-direction: column;
-                align-items: flex-start;
-            }
         }
 
         /* صورة الخلفية المتكيفة */
@@ -128,13 +118,12 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="navbar-links">
-            <a href="https://mosabka25.github.io/mosabaka25/index.html"><i class="fas fa-home"></i> الرئيسية</a>
-            <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
-            <a href="https://mosabka25.github.io/mosabaka25/دليل المعلم.html"><i class="fas fa-chalkboard-teacher"></i> دليل المعلم</a>
-            <a href="https://mosabka25.github.io/mosabaka25/دفتر التحضير.html"><i class="fas fa-book-open"></i> دفتر التحضير</a>
-                        
-        </div>
+        <a href="https://mosabka25.github.io/mosabaka25/index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
+        <a href="https://mosabka25.github.io/mosabaka25/دليل المعلم.html"><i class="fas fa-chalkboard-teacher"></i> دليل المعلم</a>
+        <a href="https://mosabka25.github.io/mosabaka25/دفتر التحضير.html"><i class="fas fa-book-open"></i> دفتر التحضير</a>
+        <a href="#"><i class="fas fa-guitar"></i> أغاني تعليمية</a>
+        <a href="https://mosabka25.github.io/mosabaka25/اتصل%20بنا.html"><i class="fas fa-envelope"></i> اتصل بنا</a>
     </nav>
 
     <div class="image-container">
