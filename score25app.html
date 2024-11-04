@@ -169,30 +169,32 @@
             canvas = document.getElementById('pdf-viewer'),
             ctx = canvas.getContext('2d');
 
-        function renderPage(num) {
-            pageRendering = true;
-            pdfDoc.getPage(num).then(function(page) {
-                var viewport = page.getViewport({scale: scale});
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
+       function renderPage(num) {
+    pageRendering = true;
+    pdfDoc.getPage(num).then(function(page) {
+        var viewport = page.getViewport({scale: window.innerWidth / page.getViewport({scale: 1}).width});
+        canvas.height = viewport.height + 20;
+        canvas.width = viewport.width;
 
-                var renderContext = {
-                    canvasContext: ctx,
-                    viewport: viewport
-                };
-                var renderTask = page.render(renderContext);
+        var renderContext = {
+            canvasContext: ctx,
+            viewport: viewport
+        };
+        var renderTask = page.render(renderContext);
 
-                renderTask.promise.then(function() {
-                    pageRendering = false;
-                    if (pageNumPending !== null) {
-                        renderPage(pageNumPending);
-                        pageNumPending = null;
-                    }
-                });
-            });
+        renderTask.promise.then(function() {
+            pageRendering = false;
+            if (pageNumPending !== null) {
+                renderPage(pageNumPending);
+                pageNumPending = null;
+            }
+        });
+    });
 
-            document.getElementById('page-num').value = num;
-        }
+    document.getElementById('page-num').value = num;
+}
+ 
+
 
         function queueRenderPage(num) {
             if (pageRendering) {
