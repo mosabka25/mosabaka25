@@ -1,33 +1,25 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>كتاب مسابقة المراحل لعام 2024/2025</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Cairo', sans-serif;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
             background-color: #FDF7E3;
             color: #333;
-            opacity: 0.8;
+            text-align: center;
         }
-
-.navbar {
-flex-direction: row-reverse;
-}
-
-.navbar-links {
-flex-direction: row-reverse;
-}
 
         .navbar {
             position: fixed;
@@ -41,27 +33,41 @@ flex-direction: row-reverse;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-        }
-
-        .navbar-brand {
-            font-size: 1.3em;
-            font-weight: bold;
+ 
         }
 
         .navbar-links {
             display: flex;
             gap: 15px;
+            
         }
 
         .navbar-links a {
             color: white;
             text-decoration: none;
             font-size: 0.9em;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-links a i {
+            font-size: 1.4em;
+            margin-left: 5px;
         }
 
         .navbar-links a:hover {
             text-decoration: underline;
         }
+
+
+.pdf-controls input[type="number"] {
+    width: 75px; /* عرض مربع الإدخال */
+    padding: 5px; /* مسافة داخلية للتحكم بحجم النص */
+    font-size: 0.9em; /* حجم النص داخل المربع */
+    text-align: center; /* محاذاة الرقم في المنتصف */
+}
+
+
 
         /* صورة الخلفية المتكيفة */
         body::before {
@@ -98,59 +104,24 @@ flex-direction: row-reverse;
             justify-content: center;
             align-items: center;
             gap: 1.25em;
+
         }
 
         footer button {
             background-color: #FFD700;
             color: #333;
-            padding: 0.8em 1.5em;
+            padding: 0.4em 1.5em;
             border: none;
             border-radius: 0.625em;
             cursor: pointer;
             font-size: 1em;
             transition: background-color 0.3s ease;
+
         }
 
         footer button:hover {
             background-color: #FF6F61;
             color: white;
-        }
-
-        /* أنماط عارض PDF */
-        #pdf-viewer {
-            width: 100%;
-            height: 50em;
-            border: 1px solid #ccc;
-            margin-top: 1.25em;
-        }
-
-        .pdf-controls {
-            margin-top: 0.625em;
-        }
-
-        .pdf-controls input {
-            width: 3.125em;
-        }
-
-        /* استعلامات الوسائط */
-        @media only screen and (max-width: 48em) {
-            .image-container {
-                margin-top: 5em;
-            }
-            footer button {
-                padding: 0.5em 1em;
-                font-size: 0.9em;
-            }
-        }
-
-        @media only screen and (max-width: 30em) {
-            .image-container {
-                margin-top: 3.75em;
-            }
-            footer button {
-                padding: 0.375em 0.75em;
-                font-size: 0.8em;
-            }
         }
     </style>
 </head>
@@ -159,8 +130,8 @@ flex-direction: row-reverse;
         <div class="navbar-links">
             <a href="https://mosabka25.github.io/mosabaka25/index.html"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
-            <a href="https://mosabka25.github.io/mosabaka25/دليل المعلم.html"><i class="fas fa-person-chalkboard"></i> دليل المعلم</a>
-            <a href="#"><i class="fas fa-book-open"></i> دفتر التحضير</a>
+            <a href="https://mosabka25.github.io/mosabaka25/دليل المعلم.html"><i class="fas fa-chalkboard-teacher"></i> دليل المعلم</a>
+            <a href="https://mosabka25.github.io/mosabaka25/دفتر التحضير.html"><i class="fas fa-book-open"></i> دفتر التحضير</a>
             <a href="#"><i class="fas fa-guitar"></i> أغاني تعليمية</a>
             <a href="https://mosabka25.github.io/mosabaka25/اتصل%20بنا.html"><i class="fas fa-envelope"></i> اتصل بنا</a>
         </div>
