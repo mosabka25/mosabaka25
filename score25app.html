@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>كتاب مسابقة المراحل لعام 2024/2025</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -33,13 +33,12 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
- 
         }
 
         .navbar-links {
             display: flex;
             gap: 15px;
-            
+            flex-wrap: wrap;
         }
 
         .navbar-links a {
@@ -59,15 +58,12 @@
             text-decoration: underline;
         }
 
-
-.pdf-controls input[type="number"] {
-    width: 75px; /* عرض مربع الإدخال */
-    padding: 5px; /* مسافة داخلية للتحكم بحجم النص */
-    font-size: 0.9em; /* حجم النص داخل المربع */
-    text-align: center; /* محاذاة الرقم في المنتصف */
-}
-
-
+        @media (max-width: 600px) {
+            .navbar-links {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
 
         /* صورة الخلفية المتكيفة */
         body::before {
@@ -104,7 +100,13 @@
             justify-content: center;
             align-items: center;
             gap: 1.25em;
+        }
 
+        .pdf-controls input[type="number"] {
+            width: 50px; /* تصغير عرض مربع الإدخال */
+            padding: 5px;
+            font-size: 0.9em;
+            text-align: center;
         }
 
         footer button {
@@ -116,7 +118,6 @@
             cursor: pointer;
             font-size: 1em;
             transition: background-color 0.3s ease;
-
         }
 
         footer button:hover {
@@ -170,31 +171,28 @@
             ctx = canvas.getContext('2d');
 
        function renderPage(num) {
-    pageRendering = true;
-    pdfDoc.getPage(num).then(function(page) {
-        var viewport = page.getViewport({scale: window.innerWidth / page.getViewport({scale: 1}).width});
-        canvas.height = viewport.height + 20;
-        canvas.width = viewport.width;
+            pageRendering = true;
+            pdfDoc.getPage(num).then(function(page) {
+                var viewport = page.getViewport({scale: window.innerWidth / page.getViewport({scale: 1}).width});
+                canvas.height = viewport.height + 20;
+                canvas.width = viewport.width;
 
-        var renderContext = {
-            canvasContext: ctx,
-            viewport: viewport
-        };
-        var renderTask = page.render(renderContext);
+                var renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                var renderTask = page.render(renderContext);
 
-        renderTask.promise.then(function() {
-            pageRendering = false;
-            if (pageNumPending !== null) {
-                renderPage(pageNumPending);
-                pageNumPending = null;
-            }
-        });
-    });
-
-    document.getElementById('page-num').value = num;
-}
- 
-
+                renderTask.promise.then(function() {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+            });
+            document.getElementById('page-num').value = num;
+        }
 
         function queueRenderPage(num) {
             if (pageRendering) {
