@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>كتاب مسابقة المراحل لعام 2024/2025</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مسابقة التربية الموسيقية لعام 2024/2025</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -19,7 +19,16 @@
             background-color: #FDF7E3;
             color: #333;
             text-align: center;
+            opacity: 0.9;
         }
+
+.navbar {
+flex-direction: row-reverse;
+}
+
+.navbar-links {
+flex-direction: row-reverse;
+}
 
         .navbar {
             position: fixed;
@@ -30,32 +39,29 @@
             color: white;
             padding: 10px 20px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
             z-index: 1000;
         }
 
-        .navbar a {
+        .navbar-brand {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar-links a {
             color: white;
             text-decoration: none;
             font-size: 0.9em;
-            display: flex;
-            align-items: center;
-            padding: 8px;
         }
 
-        .navbar a i {
-            font-size: 1.4em;
-            margin-left: 5px;
-        }
 
-        .navbar a:hover {
-            text-decoration: underline;
-        }
-
-        /* صورة الخلفية المتكيفة */
+ /* صورة الخلفية المتكيفة */
         body::before {
             content: "";
             position: fixed;
@@ -63,162 +69,190 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/0ce7380c621cd29c720e317a311004f9bb6cbf0d/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A9_1.jpg');
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/af5d098c1932a0e1e80da200ffabf03b2f3dd749/dalelycover.png');
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
             z-index: -1;
-            opacity: 0.2;
+            opacity: 0.8;
+        }
+
+
+
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 6.25em;
+            margin-bottom: 1.25em;
+            height: calc(100vh - 200px);
         }
 
         .image-container img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 1.25em;
-            border-radius: 0.625em;
-            box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            max-height: 100%;
         }
 
-        #pdf-container {
-            margin-bottom: 1.5em;
-        }
-
-        footer {
-            background-color: #000;
-            color: white;
-            padding: 1.25em;
-            position: fixed;
+        #pdf-viewer {
             width: 100%;
+            max-width: 90vw;
+            height: auto;
+             margin-bottom: 60px;
+        }
+
+        #control-panel {
+            position: fixed;
             bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #C11B17;
+            color: white;
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 1.25em;
+            padding: 10px 0;
+            z-index: 1000;
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .pdf-controls input[type="number"] {
-            width: 50px;
-            padding: 5px;
-            font-size: 0.9em;
-            text-align: center;
-        }
-
-        footer button {
+        #control-panel button, #control-panel input {
             background-color: #FFD700;
             color: #333;
-            padding: 0.4em 1.5em;
+            padding: 0.5em;
+            margin: 0 0.2em;
             border: none;
-            border-radius: 0.625em;
+            border-radius: 0.5em;
             cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
+            font-size: 0.8em;
         }
 
-        footer button:hover {
-            background-color: #FF6F61;
-            color: white;
-        }
+#control-panel input[type="number"] {
+    width: 60px; /* تحديد عرض أصغر */
+}
+
+
+
     </style>
 </head>
 <body>
-    <nav class="navbar">
+
+<nav class="navbar">
+    <div class="navbar-links">
         <a href="https://mosabka25.github.io/mosabaka25/index.html"><i class="fas fa-home"></i> الرئيسية</a>
         <a href="https://mosabka25.github.io/mosabaka25/vedio.html"><i class="fas fa-music"></i>فيديو المسابقة</a>
-        
-    </nav>
-
-    <div id="pdf-container">
-        <canvas id="pdf-viewer"></canvas>
+        <a href="https://mosabka25.github.io/mosabaka25/دليل المعلم.html"><i class="fas fa-person-chalkboard"></i> دليل المعلم</a>
+        <a href="https://mosabka25.github.io/mosabaka25/%D8%AF%D9%81%D8%AA%D8%B1%20%D8%A7%D9%84%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1.html"><i class="fas fa-book-open"></i> دفتر التحضير</a>
+        <a href="#"><i class="fas fa-guitar"></i> أغاني تعليمية</a>
+        <a href="https://mosabka25.github.io/mosabaka25/اتصل%20بنا.html"><i class="fas fa-envelope"></i> اتصل بنا</a>
     </div>
+</nav>
 
-    <footer>
-        <div id="control-panel">
-            *** كتاب مسابقة المراحل لعام 2024_2025 ***
-            <br>
-            <div class="pdf-controls">
-                <button id="prev-page">السابق</button>
-                <input type="number" id="page-num" value="1" min="1">
-                <button id="next-page">التالي</button>
-                <button id="download-page">تحميل</button>
-                <span id="page-count"></span>
-            </div>
-        </div>
-    </footer>
+<div class="image-container">
+    <img id="image-display" src="https://raw.githubusercontent.com/mosabka25/mosabaka25/6e97e68188be0e7b3cebfe957b16ab725344a5e8/%D8%A7%D9%84%D9%81%D9%87%D8%B1%D8%B3%20%D9%85%D8%B9%D8%AF%D9%84%202.jpg" alt="صورة 2">
+        <img id="image-display" src="https://raw.githubusercontent.com/mosabka25/mosabaka25/38a4e377d0ba7692da7f5c9b5e5d5767eea600d4/%D8%A7%D9%84%D9%81%D9%87%D8%B1%D8%B3%20%D9%85%D8%B9%D8%AF%D9%84%201.jpg" alt="صورة 1">
+</div>
 
-    <script>
-        const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/6e97e68188be0e7b3cebfe957b16ab725344a5e8/%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A9%20%D9%83%D8%A7%D9%85%D9%84%D8%A9.pdf';
-        let pdfDoc = null,
-            pageNum = 1,
-            pageRendering = false,
-            pageNumPending = null,
-            scale = 2.0,  // زيادة الدقة لعرض أوضح
-            canvas = document.getElementById('pdf-viewer'),
-            ctx = canvas.getContext('2d');
+<canvas id="pdf-viewer"></canvas>
 
-        function renderPage(num) {
-            pageRendering = true;
-            pdfDoc.getPage(num).then(function(page) {
-                const viewport = page.getViewport({scale: scale});
-                canvas.width = viewport.width;
-                canvas.height = viewport.height + 30; // إضافة هامش سفلي
+<div id="control-panel">
+    <button id="prev-page">السابق</button>
+    <input type="number" id="page-num" value="1" min="1">
+    <button id="next-page">التالي</button>
+    <button id="download-page">تحميل</button>
+    <span id="page-count"></span>
+</div>
 
-                const renderContext = {
-                    canvasContext: ctx,
-                    viewport: viewport
-                };
-                const renderTask = page.render(renderContext);
+<script>
+// إعداد PDF Viewer
+const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/6e97e68188be0e7b3cebfe957b16ab725344a5e8/%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A9%20%D9%83%D8%A7%D9%85%D9%84%D8%A9.pdf';
 
-                renderTask.promise.then(function() {
-                    pageRendering = false;
-                    if (pageNumPending !== null) {
-                        renderPage(pageNumPending);
-                        pageNumPending = null;
-                    }
-                });
-            });
-            document.getElementById('page-num').value = num;
-        }
+let pdfDoc = null,
+    pageNum = 1,
+    pageRendering = false,
+    pageNumPending = null,
+    canvas = document.getElementById('pdf-viewer'),
+    ctx = canvas.getContext('2d');
 
-        function queueRenderPage(num) {
-            if (pageRendering) {
-                pageNumPending = num;
-            } else {
-                renderPage(num);
+function renderPage(num) {
+    pageRendering = true;
+    pdfDoc.getPage(num).then(function(page) {
+        const screenWidth = window.innerWidth;
+        const viewport = page.getViewport({ scale: 1.0 });
+
+        // تعيين مقياس ليتناسب مع حجم الشاشة
+        const scale = (screenWidth / viewport.width) * 1.5;
+        const scaledViewport = page.getViewport({ scale: scale });
+
+        // تعيين أبعاد الكانفاس
+        canvas.height = scaledViewport.height;
+        canvas.width = scaledViewport.width;
+
+        const renderContext = {
+            canvasContext: ctx,
+            viewport: scaledViewport
+        };
+        const renderTask = page.render(renderContext);
+
+        renderTask.promise.then(function() {
+            pageRendering = false;
+            if (pageNumPending !== null) {
+                renderPage(pageNumPending);
+                pageNumPending = null;
             }
-        }
-
-        function onPrevPage() {
-            if (pageNum <= 1) return;
-            pageNum--;
-            queueRenderPage(pageNum);
-        }
-
-        function onNextPage() {
-            if (pageNum >= pdfDoc.numPages) return;
-            pageNum++;
-            queueRenderPage(pageNum);
-        }
-
-        function downloadPage() {
-            const link = document.createElement('a');
-            link.href = canvas.toDataURL();
-            link.download = `page_${pageNum}.png`;
-            link.click();
-        }
-
-        pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
-            pdfDoc = pdfDoc_;
-            document.getElementById('page-count').textContent = pdfDoc.numPages;
-            renderPage(pageNum);
         });
+    });
 
-        document.getElementById('prev-page').addEventListener('click', onPrevPage);
-        document.getElementById('next-page').addEventListener('click', onNextPage);
-        document.getElementById('page-num').addEventListener('change', function() {
-            pageNum = parseInt(this.value);
-            queueRenderPage(pageNum);
-        });
-        document.getElementById('download-page').addEventListener('click', downloadPage);
-    </script>
+    document.getElementById('page-num').value = num;
+}
+
+function queueRenderPage(num) {
+    if (pageRendering) {
+        pageNumPending = num;
+    } else {
+        renderPage(num);
+    }
+}
+
+function onPrevPage() {
+    if (pageNum <= 1) {
+        return;
+    }
+    pageNum--;
+    queueRenderPage(pageNum);
+}
+
+function onNextPage() {
+    if (pageNum >= pdfDoc.numPages) {
+        return;
+    }
+    pageNum++;
+    queueRenderPage(pageNum);
+}
+
+function downloadPage() {
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL();
+    link.download = `page_${pageNum}.png`;
+    link.click();
+}
+
+pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
+    pdfDoc = pdfDoc_;
+    document.getElementById('page-count').textContent = pdfDoc.numPages;
+    renderPage(pageNum);
+});
+
+document.getElementById('prev-page').addEventListener('click', onPrevPage);
+document.getElementById('next-page').addEventListener('click', onNextPage);
+document.getElementById('page-num').addEventListener('change', function() {
+    const requestedPage = parseInt(this.value);
+    if (requestedPage >= 1 && requestedPage <= pdfDoc.numPages) {
+        pageNum = requestedPage;
+        queueRenderPage(pageNum);
+    }
+});
+document.getElementById('download-page').addEventListener('click', downloadPage);
+</script>
+
 </body>
 </html>
