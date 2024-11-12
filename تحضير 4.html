@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تحضيرالصف الرابع الإبتدائي</title>
+    <title>تحضير الصف الرابع الإبتدائي</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
+        /* التنسيقات السابقة */
         * {
             margin: 0;
             padding: 0;
@@ -15,20 +15,12 @@
         }
 
         body {
-           font-family: Arial, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #FDF7E3;
             color: #333;
             text-align: center;
             opacity: 0.9;
         }
-
-.navbar {
-flex-direction: row-reverse;
-}
-
-.navbar-links {
-flex-direction: row-reverse;
-}
 
         .navbar {
             position: fixed;
@@ -42,15 +34,12 @@ flex-direction: row-reverse;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-        }
-
-        .navbar-brand {
-            font-size: 1.3em;
-            font-weight: bold;
+            flex-direction: row-reverse;
         }
 
         .navbar-links {
             display: flex;
+            flex-direction: row-reverse;
             gap: 15px;
         }
 
@@ -60,8 +49,7 @@ flex-direction: row-reverse;
             font-size: 0.9em;
         }
 
-
- /* صورة الخلفية المتكيفة */
+        /* صورة الخلفية المتكيفة */
         body::before {
             content: "";
             position: fixed;
@@ -76,8 +64,6 @@ flex-direction: row-reverse;
             z-index: -1;
             opacity: 0.8;
         }
-
-
 
         .image-container {
             display: flex;
@@ -98,7 +84,7 @@ flex-direction: row-reverse;
             width: 100%;
             max-width: 90vw;
             height: auto;
-             margin-bottom: 60px;
+            margin-bottom: 60px;
         }
 
         #control-panel {
@@ -126,12 +112,9 @@ flex-direction: row-reverse;
             font-size: 0.8em;
         }
 
-#control-panel input[type="number"] {
-    width: 60px; /* تحديد عرض أصغر */
-}
-
-
-
+        #control-panel input[type="number"] {
+            width: 60px;
+        }
     </style>
 </head>
 <body>
@@ -142,7 +125,7 @@ flex-direction: row-reverse;
         <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
         <a href="https://mosabka25.github.io/mosabaka25/دليل المعلم.html"><i class="fas fa-person-chalkboard"></i> دليل المعلم</a>
         <a href="https://mosabka25.github.io/mosabaka25/%D8%AF%D9%81%D8%AA%D8%B1%20%D8%A7%D9%84%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1.html"><i class="fas fa-book-open"></i> دفتر التحضير</a>
-             <a href="https://mosabka25.github.io/mosabaka25/أغانى تعليمية.html"><i class="fas fa-envelope"></i>أغانى تعليمية</a>
+        <a href="https://mosabka25.github.io/mosabaka25/أغانى تعليمية.html"><i class="fas fa-envelope"></i>أغانى تعليمية</a>
         <a href="https://mosabka25.github.io/mosabaka25/اتصل%20بنا.html"><i class="fas fa-envelope"></i> اتصل بنا</a>
     </div>
 </nav>
@@ -157,14 +140,12 @@ flex-direction: row-reverse;
     <button id="prev-page">السابق</button>
     <input type="number" id="page-num" value="1" min="1">
     <button id="next-page">التالي</button>
-    <button id="download-page">تحميل</button>
+    <button id="download-pdf">تحميل PDF بالكامل</button>
     <span id="page-count"></span>
 </div>
 
 <script>
-// إعداد PDF Viewer
 const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/af5d098c1932a0e1e80da200ffabf03b2f3dd749/%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20-%20%D8%AA%D8%B1%D9%85%20%D8%A7%D9%88%D9%84.pdf';
-
 let pdfDoc = null,
     pageNum = 1,
     pageRendering = false,
@@ -172,24 +153,29 @@ let pdfDoc = null,
     canvas = document.getElementById('pdf-viewer'),
     ctx = canvas.getContext('2d');
 
+// تحميل PDF وتخزينه محليًا
+fetch(pdfUrl)
+    .then(response => response.blob())
+    .then(blob => {
+        const fileUrl = URL.createObjectURL(blob);
+        localStorage.setItem("pdfFile", fileUrl); // تخزين في المتصفح لعرضه دون اتصال
+        document.getElementById("download-pdf").onclick = () => {
+            const link = document.createElement("a");
+            link.href = fileUrl;
+            link.download = "تحضير_الصف_الرابع_الابتدائي.pdf";
+            link.click();
+        };
+    });
+
+// عرض صفحة PDF
 function renderPage(num) {
     pageRendering = true;
     pdfDoc.getPage(num).then(function(page) {
-        const screenWidth = window.innerWidth;
-        const viewport = page.getViewport({ scale: 1.0 });
+        const viewport = page.getViewport({ scale: 1.5 });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
 
-        // تعيين مقياس ليتناسب مع حجم الشاشة
-        const scale = (screenWidth / viewport.width) * 1.5;
-        const scaledViewport = page.getViewport({ scale: scale });
-
-        // تعيين أبعاد الكانفاس
-        canvas.height = scaledViewport.height;
-        canvas.width = scaledViewport.width;
-
-        const renderContext = {
-            canvasContext: ctx,
-            viewport: scaledViewport
-        };
+        const renderContext = { canvasContext: ctx, viewport: viewport };
         const renderTask = page.render(renderContext);
 
         renderTask.promise.then(function() {
@@ -200,7 +186,6 @@ function renderPage(num) {
             }
         });
     });
-
     document.getElementById('page-num').value = num;
 }
 
@@ -213,26 +198,15 @@ function queueRenderPage(num) {
 }
 
 function onPrevPage() {
-    if (pageNum <= 1) {
-        return;
-    }
+    if (pageNum <= 1) return;
     pageNum--;
     queueRenderPage(pageNum);
 }
 
 function onNextPage() {
-    if (pageNum >= pdfDoc.numPages) {
-        return;
-    }
+    if (pageNum >= pdfDoc.numPages) return;
     pageNum++;
     queueRenderPage(pageNum);
-}
-
-function downloadPage() {
-    const link = document.createElement('a');
-    link.href = canvas.toDataURL();
-    link.download = `page_${pageNum}.png`;
-    link.click();
 }
 
 pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
@@ -250,7 +224,6 @@ document.getElementById('page-num').addEventListener('change', function() {
         queueRenderPage(pageNum);
     }
 });
-document.getElementById('download-page').addEventListener('click', downloadPage);
 </script>
 
 </body>
