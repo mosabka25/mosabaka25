@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مركزتحميل دليلي ميوزيك</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FDF7E3;
+            user-select: none;
+            color: #004d40;
+        }
+
+        .titles h1 {
+            font-family: 'Amiri', serif;
+            color: #004d40;
+            font-size: 2em;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .titles h2 {
+            font-family: 'Amiri', serif;
+            color: #C11B17;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        .titles h3 {
+            font-family: 'Amiri', serif;
+            color: #004d40;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #C11B17;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .banner {
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/327c4aad7019463731697b529095eebf103b8842/dalelycover.png');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .content {
+            padding: 80px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 80%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .copy-btn {
+            padding: 15px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #C11B17;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: #A31515;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-links">
+            <a href="#"><i class="fa-solid fa-book"></i> توزيع المنهج</a>
+            <a href="#"><i class="fas fa-music"></i> المسابقة</a>
+            <a href="#"><i class="fas fa-person-chalkboard"></i> دليل المعلم</a>
+            <a href="#"><i class="fas fa-book-open"></i> دفتر التحضير</a>
+            <a href="#"><i class="fas fa-guitar"></i> أغاني تعليمية</a>
+            <a href="#"><i class="fas fa-envelope"></i> اتصل بنا</a>
+        </div>
+    </nav>
+
+    <div class="banner"></div>
+
+    <div class="titles">
+        <h1>أدوات مُعلم التربية الموسيقية</h1>
+        <h2>مركز تحميل الملفات</h2>
+        <h3>إضغط على الأيقونة لنسخ الرابط</h3>
+    </div>
+
+    <div class="content">
+        <h2>انقرللحصول على الرابط ثم قم بلصقه فى المتصفح الخارجي</h2>
+        <div class="button-container">
+            <button class="copy-btn" onclick="copyLink(this,'https://drive.google.com/file/d/1kMTq1zOwtLHq7Q9MJxhqPI6Lfe4Oi5Gg')">تحضير الصف الرابع - تيرم أول</button>
+            <button class="copy-btn" onclick="copyLink(this,'https://drive.google.com/file/d/1S0dwXKQGz3VQqJzOMWN9HdziOj1vOxFs')">تحضير الصف الخامس - تيرم أول</button>
+            <button class="copy-btn" onclick="copyLink(this,'https://drive.google.com/file/d/1JTxoAus8z3i9qy_vRydJ4PsMcSrl1RY1')">تحضير الصف السادس - تيرم أول</button>
+            <button class="copy-btn" onclick="copyLink(this,'https://drive.google.com/file/d/1bEmvdroCaaNvSLOw7ECv_d4i5sam7vvW')">تحضير الصف الأول الإعدادي - تيرم أول</button>
+            <button class="copy-btn" onclick="copyLink(this,'https://drive.google.com/file/d/1o3VtH8IRZCrFh6rejpo2Nsr2-zcal83s')">تحضير الصف الثاني الإعدادي - تيرم أول</button>
+            <button class="copy-btn" onclick="copyLink(this,'https://drive.google.com/file/d/152B9M8AlDUDg8y1m4ki_nnksOCGvK1fJ')">تحضير الصف الثالث الإعدادي - تيرم أول</button>
+            <button class="copy-btn" onclick="copyLink(this,'https://drive.google.com/file/d/1BGT4LfPAioE0hl_rd9G3kizd-MAtzXsR')">تحضير الصف الأول الثانوي - تيرم أول</button>
+            <button class="copy-btn" onclick="copyLink(this,'https://drive.google.com/file/d/1jwDp5WzPzbVpx2BlXaSGv3T_Ix8NdcjV')">تحضير الصف الثاني الثانوي - تيرم أول</button>
+            <button class="copy-btn" onclick="copyLink(this,'https://drive.google.com/file/d/1yxzSycBND4o2nsJBNnEdDaJaR9eUVs8T')">تحضير الصف الثالث الثانوي - تيرم أول</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>مركز تحميل الملفات * دليلي ميوزيك</p>
+    </footer>
+
+    <script>
+        function copyLink(button, link) {
+            const originalColor = button.style.backgroundColor;
+            const originalText = button.innerHTML;
+
+            navigator.clipboard.writeText(link).then(() => {
+                button.innerHTML = "تم نسخ الرابط بنجاح!";
+                button.style.backgroundColor = "#556B2F"; // الزيتوني الغامق
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.backgroundColor = originalColor;
+                }, 5000);
+            }).catch((error) => {
+                alert("حدث خطأ أثناء نسخ الرابط: " + error);
+            });
+        }
+    </script>
+</body>
+</html>
