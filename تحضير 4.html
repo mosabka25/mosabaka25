@@ -209,6 +209,11 @@ function onNextPage() {
     queueRenderPage(pageNum);
 }
 
+function goToPage() {
+    const targetUrl = `https://mosabka25.github.io/mosabaka25/مركز تحميل  دليلى ميوزيك.html`; // استبدل الرابط بعنوان الصفحة المطلوبة
+    window.location.href = targetUrl;
+}
+
 pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
     pdfDoc = pdfDoc_;
     document.getElementById('page-count').textContent = pdfDoc.numPages;
@@ -224,6 +229,7 @@ document.getElementById('page-num').addEventListener('change', function() {
         queueRenderPage(pageNum);
     }
 });
+document.getElementById('download-page').addEventListener('click', goToPage);
 </script>
 
 </body>
