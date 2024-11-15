@@ -15,7 +15,7 @@
         }
 
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #FDF7E3;
             color: #333;
             text-align: center;
@@ -138,10 +138,10 @@
 <nav class="navbar">
     <div class="navbar-links">
         <a href="https://mosabka25.github.io/mosabaka25/index.html"><i class="fas fa-home"></i> الرئيسية</a>
-        <a href="https://mosabka25.github.io/mosabaka25/vedio.html"><i class="fas fa-music"></i>فيديو المسابقة</a>
+        <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html"><i class="fas fa-music"></i> المسابقة</a>
         <a href="https://mosabka25.github.io/mosabaka25/دليل المعلم.html"><i class="fas fa-person-chalkboard"></i> دليل المعلم</a>
         <a href="https://mosabka25.github.io/mosabaka25/%D8%AF%D9%81%D8%AA%D8%B1%20%D8%A7%D9%84%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1.html"><i class="fas fa-book-open"></i> دفتر التحضير</a>
-        <a href="#"><i class="fas fa-guitar"></i> أغاني تعليمية</a>
+        <a href="https://mosabka25.github.io/mosabaka25/%D8%A3%D8%BA%D8%A7%D9%86%D9%89%20%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9.html"><i class="fas fa-guitar"></i> أغاني تعليمية</a>
         <a href="https://mosabka25.github.io/mosabaka25/اتصل%20بنا.html"><i class="fas fa-envelope"></i> اتصل بنا</a>
     </div>
 </nav>
@@ -225,11 +225,9 @@ function onNextPage() {
     queueRenderPage(pageNum);
 }
 
-function downloadPage() {
-    const link = document.createElement('a');
-    link.href = canvas.toDataURL();
-    link.download = `page_${pageNum}.png`;
-    link.click();
+function goToPage() {
+    const targetUrl = `https://mosabka25.github.io/mosabaka25/مركز تحميل  دليلى ميوزيك.html`; // استبدل الرابط بعنوان الصفحة المطلوبة
+    window.location.href = targetUrl;
 }
 
 pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
@@ -247,7 +245,7 @@ document.getElementById('page-num').addEventListener('change', function() {
         queueRenderPage(pageNum);
     }
 });
-document.getElementById('download-page').addEventListener('click', downloadPage);
+document.getElementById('download-page').addEventListener('click', goToPage);
 </script>
 
 </body>
