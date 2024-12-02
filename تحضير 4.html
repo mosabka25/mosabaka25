@@ -156,7 +156,7 @@ let pdfDoc = null,
     pageNumPending = null,
     canvas = document.getElementById('pdf-viewer'),
     ctx = canvas.getContext('2d');
-
+<button id="download-page">تحميل</button>
 // تحميل PDF وتخزينه محليًا
 fetch(pdfUrl)
     .then(response => response.blob())
