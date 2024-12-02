@@ -144,7 +144,7 @@
     <button id="prev-page">السابق</button>
     <input type="number" id="page-num" value="1" min="1">
     <button id="next-page">التالي</button>
-    
+    <button id="download-page">تحميل</button>
     <span id="page-count"></span>
 </div>
 
@@ -156,7 +156,7 @@ let pdfDoc = null,
     pageNumPending = null,
     canvas = document.getElementById('pdf-viewer'),
     ctx = canvas.getContext('2d');
-<button id="download-page">تحميل</button>
+
 // تحميل PDF وتخزينه محليًا
 fetch(pdfUrl)
     .then(response => response.blob())
