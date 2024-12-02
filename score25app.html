@@ -183,7 +183,7 @@ function renderPage(num) {
     pdfDoc.getPage(num).then(function(page) {
         const screenWidth = window.innerWidth;
         const viewport = page.getViewport({ scale: 1.0 });
-        const scale = (screenWidth / viewport.width) * 1.5;
+        const scale = (screenWidth / viewport.width) * 5;
         const scaledViewport = page.getViewport({ scale: scale });
 
         canvas.height = scaledViewport.height;
