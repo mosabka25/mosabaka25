@@ -157,21 +157,16 @@ let pdfDoc = null,
     canvas = document.getElementById('pdf-viewer'),
     ctx = canvas.getContext('2d');
 
-// تحميل PDF وتخزينه محليًا
+// تحميل ملف PDF
 fetch(pdfUrl)
     .then(response => response.blob())
     .then(blob => {
         const fileUrl = URL.createObjectURL(blob);
-        localStorage.setItem("pdfFile", fileUrl); // تخزين في المتصفح لعرضه دون اتصال
-        document.getElementById("download-pdf").onclick = () => {
-            const link = document.createElement("a");
-            link.href = fileUrl;
-            link.download = "تحضير_الصف_الرابع_الابتدائي.pdf";
-            link.click();
-        };
+        // تخزين الرابط في Local Storage للعرض أو التحميل
+        localStorage.setItem("pdfFile", fileUrl);
     });
 
-// عرض صفحة PDF
+// عرض الصفحة
 function renderPage(num) {
     pageRendering = true;
     pdfDoc.getPage(num).then(function(page) {
@@ -201,6 +196,7 @@ function queueRenderPage(num) {
     }
 }
 
+// الانتقال بين الصفحات
 function onPrevPage() {
     if (pageNum <= 1) return;
     pageNum--;
@@ -213,25 +209,35 @@ function onNextPage() {
     queueRenderPage(pageNum);
 }
 
-function goToPage() {
-    const targetUrl = `https://mosabka25.github.io/mosabaka25/مركز تحميل  دليلى ميوزيك.html`; // استبدل الرابط بعنوان الصفحة المطلوبة
-    window.location.href = targetUrl;
-}
-
+// تحميل الصفحة الحالية كصورة
 function downloadPage() {
     const link = document.createElement('a');
-    link.href = canvas.toDataURL();
-    link.download = `page_${pageNum}.png`;
+    link.href = canvas.toDataURL(); // تحويل الصفحة إلى صورة
+    link.download = `page_${pageNum}.png`; // اسم الصورة المحملة
     link.click();
-}    
-    
+}
 
+// تحميل ملف PDF بالكامل
+function downloadPdf() {
+    const pdfFile = localStorage.getItem("pdfFile");
+    if (pdfFile) {
+        const link = document.createElement("a");
+        link.href = pdfFile;
+        link.download = "تحضير_الصف_الرابع_الابتدائي.pdf";
+        link.click();
+    } else {
+        alert("ملف PDF غير جاهز للتحميل.");
+    }
+}
+
+// تحميل وثيقة PDF وعرض الصفحة الأولى
 pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
     pdfDoc = pdfDoc_;
     document.getElementById('page-count').textContent = pdfDoc.numPages;
     renderPage(pageNum);
 });
 
+// ربط الأزرار
 document.getElementById('prev-page').addEventListener('click', onPrevPage);
 document.getElementById('next-page').addEventListener('click', onNextPage);
 document.getElementById('page-num').addEventListener('change', function() {
@@ -241,7 +247,7 @@ document.getElementById('page-num').addEventListener('change', function() {
         queueRenderPage(pageNum);
     }
 });
-document.getElementById('download-page').addEventListener('click', goToPage);
+document.getElementById('download-page').addEventListener('click', downloadPage);
 </script>
 
 </body>
