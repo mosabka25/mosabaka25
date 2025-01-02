@@ -56,7 +56,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/68d72f58e02446ef63ccb548a9cd64d4b4f1159a/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D8%A7%D9%84%D8%A3%D8%B9%D8%AF%D8%A7%D8%AF%D9%89%20%D8%AA%D9%8A%D8%B1%D9%85%20%D8%A7%D9%88%D9%84_1.jpg');
+            background-image: url('https://raw.githubusercontent.com/mosabka25/mosabaka25/cea2b57ffd84adf24d1209f75b0b9ec8930e63ed/%D8%BA%D9%84%D8%A7%D9%81%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%89%20%D8%A7%D9%84%D8%A3%D8%B9%D8%AF%D8%A7%D8%AF%D9%89%20%D8%AA%D9%8A%D8%B1%D9%85%20%D8%A7%D9%88%D9%84_1.jpg');
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
@@ -132,7 +132,7 @@
 </nav>
 
 <div class="image-container">
-    <img id="image-display" src="https://raw.githubusercontent.com/mosabka25/mosabaka25/68d72f58e02446ef63ccb548a9cd64d4b4f1159a/f31.jpg" alt="صورة 1">
+    <img id="image-display" src="https://raw.githubusercontent.com/mosabka25/mosabaka25/cea2b57ffd84adf24d1209f75b0b9ec8930e63ed/f21.jpg" alt="صورة 1">
 </div>
 
 <canvas id="pdf-viewer"></canvas>
@@ -153,7 +153,7 @@
 
 <script>
 // إعداد PDF Viewer
-const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/68d72f58e02446ef63ccb548a9cd64d4b4f1159a/%D8%AF%D9%84%D9%8A%D9%84%20%D9%85%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%AA%D8%B1%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%8A%D9%82%D9%8A%D8%A9%20%D9%84%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D8%A7%D9%84%D8%A3%D8%B9%D8%AF%D8%A7%D8%AF%D9%89%20pdf.pdf';
+const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/68d72f58e02446ef63ccb548a9cd64d4b4f1159a/%D8%AF%D9%84%D9%8A%D9%84%20%D9%85%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%AA%D8%B1%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%8A%D9%82%D9%8A%D8%A9%20%D9%84%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%89%20%D8%A7%D9%84%D8%A3%D8%B9%D8%AF%D8%A7%D8%AF%D9%89%20pdf.pdf';
 
 let pdfDoc = null,
     pageNum = 1,
@@ -165,15 +165,24 @@ let pdfDoc = null,
 function renderPage(num) {
     pageRendering = true;
     pdfDoc.getPage(num).then(function(page) {
-        const viewport = page.getViewport({ scale: 1.5 });
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
+        const screenWidth = window.innerWidth;
+        const viewport = page.getViewport({ scale: 1.0 });
+
+        // تعيين مقياس ليتناسب مع حجم الشاشة
+        const scale = (screenWidth / viewport.width) * 1.5;
+        const scaledViewport = page.getViewport({ scale: scale });
+
+        // تعيين أبعاد الكانفاس
+        canvas.height = scaledViewport.height;
+        canvas.width = scaledViewport.width;
 
         const renderContext = {
             canvasContext: ctx,
-            viewport: viewport
+            viewport: scaledViewport
         };
-        page.render(renderContext).promise.then(() => {
+        const renderTask = page.render(renderContext);
+
+        renderTask.promise.then(function() {
             pageRendering = false;
             if (pageNumPending !== null) {
                 renderPage(pageNumPending);
@@ -194,13 +203,17 @@ function queueRenderPage(num) {
 }
 
 function onPrevPage() {
-    if (pageNum <= 1) return;
+    if (pageNum <= 1) {
+        return;
+    }
     pageNum--;
     queueRenderPage(pageNum);
 }
 
 function onNextPage() {
-    if (pageNum >= pdfDoc.numPages) return;
+    if (pageNum >= pdfDoc.numPages) {
+        return;
+    }
     pageNum++;
     queueRenderPage(pageNum);
 }
@@ -212,29 +225,23 @@ function downloadPage() {
     link.click();
 }
 
-async function downloadSelectedPages() {
-    const startPage = parseInt(document.getElementById('start-page').value);
-    const endPage = parseInt(document.getElementById('end-page').value);
+pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
+    pdfDoc = pdfDoc_;
+    document.getElementById('page-count').textContent = pdfDoc.numPages;
+    renderPage(pageNum);
+});
 
-    if (!startPage || !endPage || startPage < 1 || endPage > pdfDoc.numPages || startPage > endPage) {
-        alert("يرجى إدخال مدى صفحات صالح!");
-        return;
+document.getElementById('prev-page').addEventListener('click', onPrevPage);
+document.getElementById('next-page').addEventListener('click', onNextPage);
+document.getElementById('page-num').addEventListener('change', function() {
+    const requestedPage = parseInt(this.value);
+    if (requestedPage >= 1 && requestedPage <= pdfDoc.numPages) {
+        pageNum = requestedPage;
+        queueRenderPage(pageNum);
     }
+});
+document.getElementById('download-page').addEventListener('click', downloadPage);
+</script>
 
-    const pdfBytes = await fetch(pdfUrl).then(res => res.arrayBuffer());
-    const originalPdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
-    const newPdfDoc = await PDFLib.PDFDocument.create();
-
-    for (let i = startPage; i <= endPage; i++) {
-        const [copiedPage] = await newPdfDoc.copyPages(originalPdfDoc, [i - 1]);
-        newPdfDoc.addPage(copiedPage);
-    }
-
-    const newPdfBytes = await newPdfDoc.save();
-    const blob = new Blob([newPdfBytes], { type: 'application/pdf' });
-    const link = document.createElement('a '); link.href = URL.createObjectURL(blob); link.download = selected_pages_${startPage}_to_${endPage}.pdf; link.click(); }
-
-pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) { pdfDoc = pdfDoc_; renderPage(pageNum); });
-
-document.getElementById('prev-page').addEventListener('click', onPrevPage); document.getElementById('next-page').addEventListener('click', onNextPage); document.getElementById('page-num').addEventListener('input', function() { const requestedPage = parseInt(this.value); if (requestedPage >= 1 && requestedPage <= pdfDoc.numPages) { pageNum = requestedPage; queueRenderPage(pageNum); } }); document.getElementById('download-page').addEventListener('click', downloadPage); document.getElementById('download-range').addEventListener('click', downloadSelectedPages); </script>
-</body> </html> 
+</body>
+</html>
