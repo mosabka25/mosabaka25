@@ -233,7 +233,7 @@ pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
 
 document.getElementById('prev-page').addEventListener('click', onPrevPage);
 document.getElementById('next-page').addEventListener('click', onNextPage);
-document.getElementById('page-num').addEventListener('change', function() {
+document.getElementById('page-num').addEventListener('input', function() {
     const requestedPage = parseInt(this.value);
     if (requestedPage >= 1 && requestedPage <= pdfDoc.numPages) {
         pageNum = requestedPage;
@@ -241,6 +241,7 @@ document.getElementById('page-num').addEventListener('change', function() {
     }
 });
 document.getElementById('download-page').addEventListener('click', downloadPage);
+document.getElementById('download-range').addEventListener('click', downloadSelectedPages);
 </script>
 
 </body>
