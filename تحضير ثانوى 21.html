@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تحضير الصف الثاني الثانوي</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -22,14 +23,13 @@
             opacity: 0.9;
         }
 
-.navbar {
-flex-direction: row-reverse;
-}
+        .navbar {
+            flex-direction: row-reverse;
+        }
 
-.navbar-links {
-flex-direction: row-reverse;
-}
-
+        .navbar-links {
+            flex-direction: row-reverse;
+        }
 
         .navbar {
             position: fixed;
@@ -61,8 +61,7 @@ flex-direction: row-reverse;
             font-size: 0.9em;
         }
 
-
- /* صورة الخلفية المتكيفة */
+        /* صورة الخلفية المتكيفة */
         body::before {
             content: "";
             position: fixed;
@@ -77,8 +76,6 @@ flex-direction: row-reverse;
             z-index: -1;
             opacity: 0.8;
         }
-
-
 
         .image-container {
             display: flex;
@@ -110,10 +107,12 @@ flex-direction: row-reverse;
             background-color: #C11B17;
             color: white;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             padding: 10px 0;
             z-index: 1000;
             box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+            gap: 10px;
         }
 
         #control-panel button, #control-panel input {
@@ -127,12 +126,16 @@ flex-direction: row-reverse;
             font-size: 0.8em;
         }
 
-#control-panel input[type="number"] {
-    width: 60px; /* تحديد عرض أصغر */
-}
+        #control-panel input[type="number"] {
+            width: 60px;
+        }
 
-
-
+        .controls-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 <body>
@@ -140,20 +143,11 @@ flex-direction: row-reverse;
 <nav class="navbar">
     <div class="navbar-links">
         <a href="https://mosabka25.github.io/mosabaka25/index.html">&#127748;</i> الرئيسية</a>
-
-         <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html">&#127929</i> المسابقة</a>
-
+        <a href="https://mosabka25.github.io/mosabaka25/vedio_score.html">&#127929</i> المسابقة</a>
         <a href="https://mosabka25.github.io/mosabaka25/دليل المعلم.html">&#128210;</i> دليل المعلم</a>
-
-        
-
-<a href="https://mosabka25.github.io/mosabaka25/دفتر التحضير.html">&#128214;</i> دفتر التحضير</a>
-
-
+        <a href="https://mosabka25.github.io/mosabaka25/دفتر التحضير.html">&#128214;</i> دفتر التحضير</a>
         <a href="https://mosabka25.github.io/mosabaka25/أغانى تعليمية.html">&#127908;</i> أغانى تعليمية</a>
-        
-
-<a href="https://mosabka25.github.io/mosabaka25/اتصل%20بنا.html">📬</i> اتصل بنا</a>
+        <a href="https://mosabka25.github.io/mosabaka25/اتصل%20بنا.html">📬</i> اتصل بنا</a>
     </div>
 </nav>
 
@@ -164,35 +158,41 @@ flex-direction: row-reverse;
 <canvas id="pdf-viewer"></canvas>
 
 <div id="control-panel">
-    <button id="prev-page">السابق</button>
-    <input type="number" id="page-num" value="1" min="1">
-    <button id="next-page">التالي</button>
-    <button id="download-page">تحميل</button>
-    <span id="page-count"></span>
+    <div class="controls-row">
+        <button id="prev-page">السابق</button>
+        <input type="number" id="page-num" value="1" min="1">
+        <button id="next-page">التالي</button>
+        <button id="download-page">تحميل الصفحة الحالية</button>
+    </div>
+    <div class="controls-row">
+        <input type="number" id="start-page" placeholder="من" min="1">
+        <input type="number" id="end-page" placeholder="إلى" min="1">
+        <button id="download-range">تحميل الصفحات المحددة</button>
+    </div>
 </div>
 
 <script>
-// إعداد PDF Viewer
 const pdfUrl = 'https://raw.githubusercontent.com/mosabka25/mosabaka25/40409be064fce0aed006978daf44c55c811db80b/%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%89%20%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%88%D9%89%20-%20%D8%AA%D8%B1%D9%85%20%D8%A7%D9%88%D9%84.pdf';
 
-let pdfDoc = null,
-    pageNum = 1,
-    pageRendering = false,
-    pageNumPending = null,
-    canvas = document.getElementById('pdf-viewer'),
+let pdfDoc = null, 
+    pageNum = 1, 
+    canvas = document.getElementById('pdf-viewer'), 
     ctx = canvas.getContext('2d');
 
+// تحميل PDF وعرض الصفحة الأولى
+pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
+    pdfDoc = pdfDoc_;
+    renderPage(pageNum);
+});
+
+// عرض الصفحة مع تكييف الحجم
 function renderPage(num) {
-    pageRendering = true;
     pdfDoc.getPage(num).then(function(page) {
         const screenWidth = window.innerWidth;
-        const viewport = page.getViewport({ scale: 1.0 });
-
-        // تعيين مقياس ليتناسب مع حجم الشاشة
-        const scale = (screenWidth / viewport.width) * 1.5;
+        const viewport = page.getViewport({ scale: 1 });
+        const scale = Math.min((screenWidth / viewport.width) * 1.4, 1.8);
         const scaledViewport = page.getViewport({ scale: scale });
 
-        // تعيين أبعاد الكانفاس
         canvas.height = scaledViewport.height;
         canvas.width = scaledViewport.width;
 
@@ -200,68 +200,82 @@ function renderPage(num) {
             canvasContext: ctx,
             viewport: scaledViewport
         };
-        const renderTask = page.render(renderContext);
-
-        renderTask.promise.then(function() {
-            pageRendering = false;
-            if (pageNumPending !== null) {
-                renderPage(pageNumPending);
-                pageNumPending = null;
-            }
-        });
+        
+        page.render(renderContext);
+        document.getElementById('page-num').value = num;
     });
-
-    document.getElementById('page-num').value = num;
 }
 
-function queueRenderPage(num) {
-    if (pageRendering) {
-        pageNumPending = num;
-    } else {
-        renderPage(num);
+// تغيير الصفحة
+function changePage(offset) {
+    const newPageNum = pageNum + offset;
+    if (newPageNum >= 1 && newPageNum <= pdfDoc.numPages) {
+        pageNum = newPageNum;
+        renderPage(pageNum);
     }
 }
 
-function onPrevPage() {
-    if (pageNum <= 1) {
-        return;
-    }
-    pageNum--;
-    queueRenderPage(pageNum);
-}
-
-function onNextPage() {
-    if (pageNum >= pdfDoc.numPages) {
-        return;
-    }
-    pageNum++;
-    queueRenderPage(pageNum);
-}
-
+// تحميل الصفحة كصورة
 function downloadPage() {
     const link = document.createElement('a');
     link.href = canvas.toDataURL();
-    link.download = `page_${pageNum}.png`;
+    link.download = `صفحة_${pageNum}.png`;
     link.click();
 }
 
-pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc_) {
-    pdfDoc = pdfDoc_;
-    document.getElementById('page-count').textContent = pdfDoc.numPages;
-    renderPage(pageNum);
-});
+// تحميل الصفحات المحددة
+async function downloadSelectedPages() {
+    const startPage = parseInt(document.getElementById('start-page').value);
+    const endPage = parseInt(document.getElementById('end-page').value);
 
-document.getElementById('prev-page').addEventListener('click', onPrevPage);
-document.getElementById('next-page').addEventListener('click', onNextPage);
-document.getElementById('page-num').addEventListener('change', function() {
-    const requestedPage = parseInt(this.value);
-    if (requestedPage >= 1 && requestedPage <= pdfDoc.numPages) {
-        pageNum = requestedPage;
-        queueRenderPage(pageNum);
+    if (!startPage || !endPage || startPage < 1 || endPage > pdfDoc.numPages || startPage > endPage) {
+        alert(`الرجاء إدخال نطاق صحيح بين 1 و ${pdfDoc.numPages}`);
+        return;
+    }
+
+    try {
+        const pdfBytes = await fetch(pdfUrl).then(res => res.arrayBuffer());
+        const originalPdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+        const newPdfDoc = await PDFLib.PDFDocument.create();
+
+        for (let i = startPage; i <= endPage; i++) {
+            const [copiedPage] = await newPdfDoc.copyPages(originalPdfDoc, [i - 1]);
+            newPdfDoc.addPage(copiedPage);
+        }
+
+        const newPdfBytes = await newPdfDoc.save();
+        const blob = new Blob([newPdfBytes], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `الصفحات_من_${startPage}_إلى_${endPage}.pdf`;
+        link.click();
+    } catch (error) {
+        alert("حدث خطأ أثناء المعالجة: " + error.message);
+    }
+}
+
+// ربط الأحداث
+document.getElementById('download-range').addEventListener('click', downloadSelectedPages);
+document.getElementById('prev-page').addEventListener('click', () => changePage(-1));
+document.getElementById('next-page').addEventListener('click', () => changePage(1));
+document.getElementById('download-page').addEventListener('click', downloadPage);
+
+document.getElementById('page-num').addEventListener('input', function() {
+    const newPageNum = parseInt(this.value);
+    if (newPageNum >= 1 && newPageNum <= pdfDoc.numPages) {
+        pageNum = newPageNum;
+        renderPage(pageNum);
     }
 });
-document.getElementById('download-page').addEventListener('click', downloadPage);
+
+// تحديث الحجم عند تغيير حجم النافذة
+window.addEventListener('resize', () => {
+    if (pdfDoc) {
+        renderPage(pageNum);
+    }
+});
 </script>
+
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
